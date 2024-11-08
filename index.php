@@ -20,7 +20,7 @@ session_start();
             <nav class="nav-links">
 
                 <?php
-
+// Detecta si el usuario ha iniciado sesión pra colocar su nombre, de lo contrario muestra botones para iniciar sesion o registrarse
                 if (!isset($_SESSION["Nombre"])) {
                     echo "<a href='registro.php'>Crear cuenta</a>";
                     echo "<a href='login.php'>Ingresar</a>";
