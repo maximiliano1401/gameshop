@@ -1,5 +1,5 @@
 <?php
-
+// archivo de prueba
 include "conexion.php";
 
 // Definir cuántos productos mostrar por página
