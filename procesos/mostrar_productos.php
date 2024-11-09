@@ -16,7 +16,7 @@ if (mysqli_num_rows($resultado) > 0) {
         echo "<div class='product'>"; // Inicia cada producto
         echo "<img src='" . $fila["ImagenURL"] . "' alt='" . $fila["Nombre"] . "'>"; // Muestra la imagen del producto
         echo "<p>" . $fila["Nombre"] . "</p>"; // Nombre y descripción
-        echo "<span class='price'>$" . $fila["Precio"] . "</span>"; // Muestra el precio con formato
+        echo "<span class='price'>$" . $fila["Precio"] . "</span>"; // Muestra el precio
         echo " </button></a>"; // Botón para ver más detalles
         echo "</div>"; // Cierra el div de cada producto
     }
