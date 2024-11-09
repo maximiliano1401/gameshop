@@ -3,6 +3,11 @@
     // Incluir conexión
     include "conexion.php";
 
+    if (!defined('INCLUDED')) {
+        header("Location: " . $_SERVER['HTTP_REFERER']);
+        exit();
+    }
+
     $correoError = "";
     $contrasenaError = "";
 

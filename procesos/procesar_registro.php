@@ -38,6 +38,7 @@
             // Comprobar si ya existe el correo
             $sql = "SELECT * FROM usuarios WHERE Correo = '$Correo'";
             $resultado = mysqli_query($conexion, $sql);
+            
             if (mysqli_num_rows($resultado) > 0) {
                 $correoError = "Correo ya está registrado";
             } else {
