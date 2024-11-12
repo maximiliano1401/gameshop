@@ -17,11 +17,11 @@
         $Correo = trim($_POST["Correo"]);
         $Contrasena = trim($_POST["Contrasena"]);
         $Telefono = trim($_POST["Telefono"]);
-        $Direccion = trim($_POST["Direccion"]);
+        // $Direccion = trim($_POST["Direccion"]);
         $Confirmar_Contrasena = trim($_POST["Confirmar_Contrasena"]);
 
         // Validamos que ninguna variable esté vacái
-        $validaciones = [$Nombre, $Correo, $Contrasena, $Contrasena, $Telefono, $Direccion, $Confirmar_Contrasena];
+        $validaciones = [$Nombre, $Correo, $Contrasena, $Contrasena, $Telefono, $Confirmar_Contrasena];
         foreach ($validaciones as $validar) {
             if (empty($validar)) {
                 echo "<script>
@@ -48,8 +48,8 @@
                 $Contrasena = password_hash($Contrasena, PASSWORD_DEFAULT);
 
                 // Insertar el registro en la base de datos
-                $sql = "INSERT INTO usuarios (Nombre, Correo, Contrasena, Direccion, Telefono)
-                VALUES ('$Nombre', '$Correo', '$Contrasena', '$Direccion', '$Telefono')";
+                $sql = "INSERT INTO usuarios (Nombre, Correo, Contrasena, Telefono)
+                VALUES ('$Nombre', '$Correo', '$Contrasena', '$Telefono')";
 
 
                 if (mysqli_query($conexion, $sql)) {

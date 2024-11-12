@@ -17,18 +17,20 @@ include "procesos/procesar_registro.php";
         <!-- Sección Izquierda -->
         <div class="form-section">
             <h2>Registro</h2>
-            <form method="POST" action="procesar_registro.php">
+            <form method="POST" action="">
                 <label for="Nombre">Nombre</label>
                 <input type="text" name="Nombre" placeholder="Nombre completo" required>
 
                 <label for="Correo">Email</label>
                 <input type="email" name="Correo" placeholder="Correo electrónico" required>
-
+                <p id="correo_registro" style="color: red;"> <?php echo $correoError; ?></p>
+                
                 <label for="Contrasena">Contraseña</label>
                 <input type="password" name="Contrasena" placeholder="Introducir contraseña" required>
 
                 <label for="Confirmar_Contrasena">Contraseña</label>
                 <input type="password" name="Confirmar_Contrasena" placeholder="Confirmar contraseña" required>
+                <p id="contrasena_registro" style="color: red;"> <?php echo $contrasenaError; ?></p>
 
                 <label for="Telefono">Número celular</label>
                 <input type="text" name="Telefono" placeholder="Número" required>
