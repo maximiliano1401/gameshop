@@ -9,33 +9,36 @@ include "procesos/procesar_registro.php";
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>login</title>
+    <title>Registro de Usuario</title>
+    <link rel="stylesheet" href="Css/registro_u.css">
 </head>
 <body>
-    
-<form action="" method="post">
+    <div class="container">
+        <!-- Sección Izquierda -->
+        <div class="form-section">
+            <h2>Registro</h2>
+            <form method="POST" action="procesar_registro.php">
+                <label for="Nombre">Nombre</label>
+                <input type="text" name="Nombre" placeholder="Nombre completo" required>
 
-    <label for="Nombre">Nombre</label>
-    <input type="text" name="Nombre">
-    <br><br>
-    <label for="Correo">Correo</label>
-    <input type="email" name="Correo">
-    <p id="correo_registro" style="color: red;"> <?php echo $correoError; ?> </p>
-    <label for="Contrasena">Contraseña</label>
-    <input type="password" name="Contrasena">
-    <br><br>
-    <label for="Confirmar_Contrasena">Confirmar Contraseña</label>
-    <input type="password" name="Confirmar_Contrasena">
-    <p id="contrasena_registro" style="color: red;"> <?php echo $contrasenaError; ?> </p>
-    <label for="Telefono">Teléfono</label>
-    <input type="text" name="Telefono">
-    <br><br>
-    <label for="Direccion">Dirección</label>
-    <input type="text" name="Direccion">
-    <br><br>
-    <input type="submit" value="Registrar">
+                <label for="Correo">Email</label>
+                <input type="email" name="Correo" placeholder="Correo electrónico" required>
 
-</form>
+                <label for="Contrasena">Contraseña</label>
+                <input type="password" name="Contrasena" placeholder="Introducir contraseña" required>
 
+                <label for="Confirmar_Contrasena">Contraseña</label>
+                <input type="password" name="Confirmar_Contrasena" placeholder="Confirmar contraseña" required>
+
+                <label for="Telefono">Número celular</label>
+                <input type="text" name="Telefono" placeholder="Número" required>
+
+                <button type="submit">Registrar</button>
+            </form>
+        </div>
+
+       
+
+    </div>
 </body>
 </html>
