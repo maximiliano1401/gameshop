@@ -13,7 +13,7 @@ if (isset($_GET['id'])) {
     if (mysqli_num_rows($resultado) > 0) {
         $producto = mysqli_fetch_assoc($resultado);
 
-
+        $ProductoID = $producto["ProductoID"];
         $Nombre = $producto["Nombre"];
         $ImagenURL = $producto["ImagenURL"];
         $Descripcion = $producto["Descripcion"];

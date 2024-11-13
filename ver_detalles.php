@@ -47,8 +47,12 @@ include "procesos/ver_detalle_producto.php";
                 <p class="plataforma"> <?php echo $Categoria ?> </p>
                 <p class="precio"> <?php echo $Precio ?> </p>
 
-                <button class="boton-comprar">Comprar</button>
-                <button class="boton-carrito">Agregar al carrito</button>
+                <!-- <button class="boton-comprar">Comprar</button> -->
+                <!-- <button class="boton-carrito">Agregar al carrito</button> -->
+                <form action="procesos_test/agregar_al_carrito.php" method="POST">
+                    <input type="hidden" name="ProductoID" value="<?php echo $ProductoID; ?>">
+                    <button type="submit" class="boton-carrito">Agregar al carrito</button>
+                </form>
 
                 <div class="descripcion-producto">
                     <h3>Acerca de este artículo</h3>
