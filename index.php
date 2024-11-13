@@ -50,6 +50,9 @@ session_start();
     </section>
     <?php
 
+// esta parte redirige al mostrar_productos
+
+
     include "procesos/mostrar_productos.php";
 
     ?>
