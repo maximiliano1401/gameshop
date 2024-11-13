@@ -25,7 +25,6 @@ if (isset($_POST['ProductoID'])) {
         if ($fila["Cantidad"] > 0) {
         
             echo "<script> alert('Producto ya en carrito.'); </script>";
-            // window history back
             echo "<script> window.history.back(); </script>";
             // header("Location: ../ver_detalles.php?id=" . $ProductoID);
 
