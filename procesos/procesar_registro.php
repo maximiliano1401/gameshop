@@ -28,7 +28,7 @@
                 alert('Por favor llenar todos los campos.');
                 window.history.back();
               </script>";
-              exit;
+                exit;
             }
         }
 
@@ -38,7 +38,7 @@
             // Comprobar si ya existe el correo
             $sql = "SELECT * FROM usuarios WHERE Correo = '$Correo'";
             $resultado = mysqli_query($conexion, $sql);
-            
+
             if (mysqli_num_rows($resultado) > 0) {
                 $correoError = "Correo ya está registrado";
             } else {
@@ -53,7 +53,9 @@
 
 
                 if (mysqli_query($conexion, $sql)) {
-                    echo "Usuario registrado";
+                    echo "<script>
+                alert('Usuario Registrado.');
+              </script>";
                 } else {
                     echo "Error al guardar los datos: " . mysqli_error($conexion);
                 }
