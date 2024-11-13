@@ -11,7 +11,7 @@ include "procesos/ver_detalle_producto.php";
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detalles del Producto - Game Shop</title>
-    <link rel="stylesheet" href="produc.css">
+    <link rel="stylesheet" href="Css/produc.css">
 </head>
 
 <body>
