@@ -1,10 +1,9 @@
 <?php
 session_start();
-include "../conexion.php"; // Incluye tu archivo de conexión a la base de datos
+include "../conexion.php";
 
 // Verificar si el usuario ha iniciado sesión
 if (!isset($_SESSION["UsuarioID"])) {
-    // Redirigir al usuario a la página de inicio de sesión
     header("Location: ../login.php");
     exit();
 }
@@ -21,30 +20,38 @@ if (isset($_POST['ProductoID'])) {
     $resultado = mysqli_query($conexion, $sql);
 
     if ($resultado->num_rows > 0) {
-        // Si el producto ya está en el carrito, incrementar la cantidad
-        $fila = $resultado->fetch_assoc();
-        $nueva_cantidad = $fila['Cantidad'] + 1;
+        $fila = mysqli_fetch_assoc($resultado);
 
-        $sql = $conn->prepare("UPDATE carritodecompras SET Cantidad = ? WHERE UsuarioID = ? AND ProductoID = ?");
-        $sql->bind_param("iii", $nueva_cantidad, $UsuarioID, $ProductoID);
-        $sql->execute();
-    } else {
+        if ($fila["Cantidad"] > 0) {
+        
+            echo "<script> alert('Producto ya en carrito.'); </script>";
+            // window history back
+            echo "<script> window.history.back(); </script>";
+            // header("Location: ../ver_detalles.php?id=" . $ProductoID);
+
+            exit();
+        }
+
+        } else {
         // Si el producto no está en el carrito, agregarlo
-        $Cantidad = 1; // Inicializar cantidad a 1
+        $Cantidad = 1;
         $sql = "INSERT INTO carritodecompras (UsuarioID, ProductoID, Cantidad) 
         VALUES ('$UsuarioID', '$ProductoID', '$Cantidad')";
 
         if (mysqli_query($conexion, $sql)) {
             echo "<script>
-                alert('Usuario Registrado.');
+                alert('Producto Añadido.');
                 </script>";
+
+            echo "<script> window.history.back(); </script>";
+
         } else {
             echo "Error al guardar los datos: " . mysqli_error($conexion);
         }
     }
 
-    // Redirigir de vuelta a la página del producto o a donde desees
-    header("Location: ../ver_detalles.php?id=" . $ProductoID);
+    // Redirigir de vuelta a la página del producto
+    // header("Location: ../ver_detalles.php?id=" . $ProductoID);
     exit();
 } else {
     // Redirigir si no hay un ID del producto
