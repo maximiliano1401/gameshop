@@ -59,3 +59,4 @@ if (isset($_POST['ProductoID'])) {
 }
 
 mysqli_close($conexion);
+?>

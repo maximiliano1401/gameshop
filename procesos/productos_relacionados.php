@@ -25,3 +25,4 @@ if (mysqli_num_rows($productos_relacionados_resultado) > 0) {
                 ";
     }
 }
+?>

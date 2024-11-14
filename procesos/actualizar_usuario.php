@@ -7,6 +7,10 @@ if (!isset($_SESSION["UsuarioID"])) {
     exit;
 }
 
+$contrasenaActualError = "";
+$contrasenaNuevaError = "";
+$actualizado = false;
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $UsuarioID = $_POST['UsuarioID'];
     $Nombre = $_POST['Nombre'];
@@ -19,22 +23,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!empty($ContrasenaActual) && !empty($ContrasenaNueva) && !empty($ConfContrasenaNueva)) {
 
         $sqlActualizarContrasena = "SELECT * FROM usuarios WHERE UsuarioID = '$UsuarioID'";
-        $resulado = mysqli_query($conexion, $sqlSeleccion);
-        $fila = mysqli_fetch_assoc($resulado);
+        $resultado = mysqli_query($conexion, $sqlActualizarContrasena);
+        $fila = mysqli_fetch_assoc($resultado);
 
-        if ($fila["Contrasena"] == $ContrasenaActual) {
+        if (password_verify($ContrasenaActual, $fila["Contrasena"])) {
 
             if ($ContrasenaNueva == $ConfContrasenaNueva) {
 
                 $ContrasenaNueva = password_hash($ContrasenaNueva, PASSWORD_DEFAULT);
                 // Actualizar contraseña en la base de datos
-                $sql = "UPDATE usuarios SET Contrasena = '$ContrasenaNueva'";
-
+                $sqlActualizarContrasena = "UPDATE usuarios SET Contrasena = '$ContrasenaNueva' WHERE UsuarioID = '$UsuarioID'";
+                if (mysqli_query($conexion, $sqlActualizarContrasena)) {
+                    $actualizado = true;
+                } else {
+                    echo "Error al actualizar la contraseña.";
+                }
             } else {
-                echo "Las contrasenas deben coincidir";
+                $contrasenaNuevaError = "Las contraseñas deben coincidir.";
+                // echo "Las contrasenas deben coincidir";
             }
         } else {
-            echo "Contrasena actual incorrecta";
+            $contrasenaActualError = "Contrasena actual incorrecta.";
+            // echo "Contrasena actual incorrecta";
         }
     }
     // FIN DE ACTUALIZAR CONTRASENA----------
@@ -42,17 +52,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // ACTUALIZAR NOMBRE
     if (!empty($Nombre)) {
         $sqlActualizarNombre = "UPDATE usuarios SET Nombre = '$Nombre' WHERE UsuarioID = '$UsuarioID'";
+        if (mysqli_query($conexion, $sqlActualizarNombre)) {
+            $actualizado = true;
+        }    
     }
     // ACTUALIZAR TELÉFONO
     if (!empty($Telefono)) {
-        $sqlActualizarTelefono = "UPDATE usuario SET Telefono = '$Telefono' WHERE UsuarioID = '$UsuarioID'";
+        $sqlActualizarTelefono = "UPDATE usuarios SET Telefono = '$Telefono' WHERE UsuarioID = '$UsuarioID'";
+        if (mysqli_query($conexion, $sqlActualizarTelefono)) {
+            $actualizado = true;
+        }
     }
 
-    if (mysqli_query($conexion, $sql)) {
+    if ($actualizado) {
         echo json_encode(["message" => "Datos guardados correctamente"]);
     } else {
-        echo json_encode(["message" => "Error al guardar los datos: "]);
+        echo json_encode(["message" => "No se realizaron cambios."]);
     }
 }
 
 mysqli_close($conexion);
+?>
