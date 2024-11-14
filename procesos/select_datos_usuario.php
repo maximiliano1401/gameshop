@@ -14,7 +14,6 @@ if (isset($_SESSION["UsuarioID"])) {
 
         $Nombre = $fila["Nombre"];
         $Correo = $fila["Correo"];
-        $Contrasena = $fila["Contrasena"];
         $Direccion = $fila["Direccion"];
         $Telefono = $fila["Telefono"];
     }
