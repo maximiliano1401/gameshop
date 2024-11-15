@@ -49,7 +49,7 @@ include "procesos/ver_detalle_producto.php";
 
                 <!-- <button class="boton-comprar">Comprar</button> -->
                 <!-- <button class="boton-carrito">Agregar al carrito</button> -->
-                <form action="procesos_test/agregar_al_carrito.php" method="POST">
+                <form action="procesos/agregar_al_carrito.php" method="POST">
                     <input type="hidden" name="ProductoID" value="<?php echo $ProductoID; ?>">
                     <button type="submit" class="boton-carrito">Agregar al carrito</button>
                 </form>
