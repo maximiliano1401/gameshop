@@ -1,5 +1,18 @@
+<?php
+session_start();
+// Incluir conexión
+include "conexion.php";
+
+
+if (!isset($_SESSION["UsuarioID"])) {
+    header("Location: login.php");
+    exit;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +20,7 @@
     <link rel="stylesheet" href="Css/perfil.css">
 
 </head>
+
 <body>
     <div class="container">
         <div class="header">
@@ -14,7 +28,7 @@
         </div>
         <div class="profile-info">
             <img src="https://via.placeholder.com/140" alt="Perfil">
-            
+
             <button class="button">
                 <span class="title">Tu información y seguridad</span>
                 <span class="description">Nombre, datos y contraseña para identificarte</span>
@@ -30,4 +44,5 @@
         </div>
     </div>
 </body>
+
 </html>

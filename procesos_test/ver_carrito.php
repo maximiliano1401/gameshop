@@ -1,9 +1,7 @@
 <?php
-// Incluir archivo de conexión
 include('conexion.php');
 
-// Obtener el ID del usuario desde la sesión (suponiendo que el usuario ya está autenticado)
-session_start(); // Iniciar sesión
+session_start();
 if (!isset($_SESSION['UsuarioID'])) {
     echo "Por favor, inicia sesión primero.";
     exit;
@@ -29,32 +27,26 @@ $sql = "
         c.UsuarioID = $usuarioID
 ";
 
-// Ejecutar la consulta
-$resultado = $conexion->query($sql);
+$resultado = mysqli_query($conexion, $sql);
 
 // Comprobar si se han encontrado productos en el carrito
-if ($resultado->num_rows > 0) {
+if (mysqli_num_rows($resultado) > 0) {
     echo "<h1>Mi Carrito de Compras</h1>";
     echo "<table border='1' cellpadding='10'>
             <tr>
-                <th>Producto</th>
-                <th>Descripción</th>
-                <th>Cantidad</th>
-                <th>Precio Unitario</th>
-                <th>Subtotal</th>
                 <th>Imagen</th>
+                <th>Nombre</th>
+                <th>Precio</th>
+
             </tr>";
 
     // Mostrar los productos del carrito
-    while ($row = $resultado->fetch_assoc()) {
+    while ($fila = mysqli_fetch_assoc($resultado)) {
         echo "<tr>
-                <td>" . $row['Producto'] . "</td>
-                <td>" . $row['Descripcion'] . "</td>
-                <td>" . $row['Cantidad'] . "</td>
-                <td>$" . number_format($row['PrecioUnitario'], 2) . "</td>
-                <td>$" . number_format($row['Subtotal'], 2) . "</td>
-                <td><img src='" . $row['ImagenURL'] . "' alt='" . $row['Producto'] . "' width='100'></td>
-              </tr>";
+        <td><img src='" . $fila['ImagenURL'] . "' width='100'></td>
+        <td>" . $fila['Producto'] . "</td>
+        <td>$" . $fila['PrecioUnitario'] . "</td>
+        </tr>";
     }
 
     // Sumar el total del carrito
@@ -65,19 +57,19 @@ if ($resultado->num_rows > 0) {
         WHERE c.UsuarioID = $usuarioID
     ";
 
-    $totalCarritoResultado = $conexion->query($totalCarritoSQL);
-    $totalCarrito = $totalCarritoResultado->fetch_assoc()['TotalCarrito'];
+    $totalCarritoResultado = mysqli_query($conexion, $totalCarritoSQL); 
+    $totalCarrito = mysqli_fetch_assoc($totalCarritoResultado);
+    // $totalCarrito = $totalCarritoResultado->fetch_assoc()['TotalCarrito'];
 
     echo "</table>";
 
     // Mostrar total del carrito
-    echo "<h2>Total del Carrito: $" . number_format($totalCarrito, 2) . "</h2>";
+    echo "<h2>Total del Carrito: $" . $totalCarrito['TotalCarrito'] . "</h2>";
     echo "<a href='pago.php'>Proceder al Pago</a>";
 
 } else {
     echo "<p>No hay productos en tu carrito.</p>";
 }
 
-// Cerrar la conexión a la base de datos
-$conexion->close();
+mysqli_close($conexion);
 ?>
