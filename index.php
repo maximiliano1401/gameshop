@@ -13,6 +13,8 @@ session_start();
 </head>
 
 <body>
+
+<!-- Menú -->
     <header>
         <div class="header-container">
             <h1 class="logo">Game<span>Shop</span></h1>
@@ -36,11 +38,11 @@ session_start();
             </nav>
         </div>
     </header>
-
+<!-- Banner -->
     <section class="banner">
         <h2>Descubre videojuegos por menos de $699</h2>
     </section>
-
+<!-- Categorías -->
     <section class="categories">
         <div class="category">Nintendo Switch</div>
         <div class="category">PlayStation 5</div>
@@ -50,9 +52,7 @@ session_start();
     </section>
     <?php
 
-// esta parte redirige al mostrar_productos
-
-
+// esta parte muestra los productos
     include "procesos/mostrar_productos.php";
 
     ?>
