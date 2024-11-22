@@ -13,7 +13,12 @@ include "procesos/ver_detalle_producto.php";
     <title>Detalles del Producto - Game Shop</title>
     <link rel="stylesheet" href="Css/produc.css">
 </head>
-
+<style>
+    .detalle-producto img {
+    width: 30%;
+    height: auto;
+}
+</style>
 <body>
     <header>
         <div class="header-container">

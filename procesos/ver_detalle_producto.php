@@ -29,10 +29,3 @@ if (isset($_GET['id'])) {
 }
 
 ?>
-
-<style>
-    img {
-        width: 20%;
-        height: auto;
-    }
-</style>
