@@ -14,14 +14,16 @@
     // Procesar registro
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $Nombre = trim($_POST["Nombre"]);
-        $Correo = trim($_POST["Correo"]);
+        $Correo = filter_input(INPUT_POST, 'Correo', FILTER_VALIDATE_EMAIL);
+        $Correo = trim($Correo);
         $Contrasena = trim($_POST["Contrasena"]);
         $Telefono = trim($_POST["Telefono"]);
+        $Edad = trim($_POST["Edad"]);
         // $Direccion = trim($_POST["Direccion"]);
         $Confirmar_Contrasena = trim($_POST["Confirmar_Contrasena"]);
 
         // Validamos que ninguna variable esté vacái
-        $validaciones = [$Nombre, $Correo, $Contrasena, $Contrasena, $Telefono, $Confirmar_Contrasena];
+        $validaciones = [$Nombre, $Correo, $Contrasena, $Contrasena, $Telefono, $Edad, $Confirmar_Contrasena];
         foreach ($validaciones as $validar) {
             if (empty($validar)) {
                 echo "<script>
@@ -31,6 +33,23 @@
                 exit;
             }
         }
+
+        if(!is_numeric($Edad) || $Edad < 18) {
+            echo "<script>
+            alert('Debes tener al menos 18 años para registrarte.');
+            window.history.back();
+            </script>";
+            exit;
+        }
+
+        if (!is_numeric($Telefono) || strlen($Telefono) < 10) {
+            echo "<script>
+            alert('Ingrese un número de teléfono válido con al menos 10 dígitos.');
+            window.history.back();
+            </script>";
+            exit;
+        }
+        
 
         // Comprobar si las contraseñas iguales
         if ($Contrasena == $Confirmar_Contrasena) {
@@ -48,8 +67,8 @@
                 $Contrasena = password_hash($Contrasena, PASSWORD_DEFAULT);
 
                 // Insertar el registro en la base de datos
-                $sql = "INSERT INTO usuarios (Nombre, Correo, Contrasena, Telefono)
-                VALUES ('$Nombre', '$Correo', '$Contrasena', '$Telefono')";
+                $sql = "INSERT INTO usuarios (Nombre, Edad, Correo, Contrasena, Telefono)
+                VALUES ('$Nombre', '$Edad', '$Correo', '$Contrasena', '$Telefono')";
 
 
                 if (mysqli_query($conexion, $sql)) {
