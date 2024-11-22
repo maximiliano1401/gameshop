@@ -142,7 +142,7 @@ if (!isset($_SESSION["UsuarioID"])) {
             <input type="text" placeholder="Número de tarjeta" value="<?php echo $NumeroTarjeta ?>" name="NumeroTarjeta" />
             <input type="text" placeholder="Nombre del Titular" value="<?php echo $NombreTitular ?>" name="NombreTitular" />
             <input type="date" placeholder="Fecha de vencimiento" value="<?php echo $FechaExpiracion ?>" name="FechaExpiracion" />
-            <input type="number" placeholder="CVV" value="<?php  ?>" name="CVV" />
+            <input type="password" placeholder="CVV" value="<?php  ?>" name="CVV" />
             <select name="TipoTarjeta" id="TipoTarjeta">
                 <option value="" disabled <?php echo ($TipoTarjeta == "") ? 'selected' : ''; ?> >Seleccione un tipo de tarjeta</option>
                 <option value="Credito" <?php echo ($TipoTarjeta == "Credito") ? 'selected' : ''; ?> >Crédito</option>
