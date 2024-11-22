@@ -8,6 +8,8 @@ if (!isset($_SESSION["UsuarioID"])) {
     exit;
 }
 
+$contrasenaActualError = "";
+$contrasenaNuevaError = "";
 $actualizado = false;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -18,64 +20,73 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $ContrasenaNueva = trim($_POST['ContrasenaNueva']);
     $ConfContrasenaNueva = trim($_POST['ConfContrasenaNueva']);
 
-
-    // ACTUALIZAR CONTRASENA-----------------
+    // ACTUALIZAR CONTRASEÑA
     if (!empty($ContrasenaActual) && !empty($ContrasenaNueva) && !empty($ConfContrasenaNueva)) {
-
         $sqlActualizarContrasena = "SELECT * FROM usuarios WHERE UsuarioID = '$UsuarioID'";
         $resultado = mysqli_query($conexion, $sqlActualizarContrasena);
         $fila = mysqli_fetch_assoc($resultado);
 
         if (password_verify($ContrasenaActual, $fila["Contrasena"])) {
-
             if ($ContrasenaNueva == $ConfContrasenaNueva) {
-
                 $ContrasenaNueva = password_hash($ContrasenaNueva, PASSWORD_DEFAULT);
-                // Actualizar contraseña en la base de datos
+                // Intentar actualizar la contraseña
                 $sqlActualizarContrasena = "UPDATE usuarios SET Contrasena = '$ContrasenaNueva' WHERE UsuarioID = '$UsuarioID'";
                 if (mysqli_query($conexion, $sqlActualizarContrasena)) {
-                    echo json_encode(["statusContrasena"=> "success", "messageContrasena" => "Contraseña actualizada"]);
                     $actualizado = true;
+                    $messageContrasena = "Contraseña actualizada correctamente.";
                 } else {
-                    echo json_encode(["statusContrasena" => "error", "messageContrasena" => "Error al actualizar la contraseña."]);
+                    $messageContrasena = "Error al actualizar la contraseña.";
                 }
             } else {
-                echo json_encode(["statusContrasena" => "error", "messageContrasena" => "Las contraseñas deben coincidir."]);
-                // $contrasenaNuevaError = "Las contraseñas deben coincidir.";
+                $messageContrasena = "Las contraseñas deben coincidir.";
             }
         } else {
-            echo json_encode(["statusContrasena" => "error", "messageContrasena" => "Contrasena actual incorrecta."]);
-            // $contrasenaActualError = "Contrasena actual incorrecta.";
+            $messageContrasena = "Contraseña actual incorrecta.";
         }
+    } else {
+        $messageContrasena = "No se proporcionaron cambios en la contraseña.";
     }
-    // FIN DE ACTUALIZAR CONTRASENA----------
 
     // ACTUALIZAR NOMBRE
     if (!empty($Nombre)) {
         $sqlActualizarNombre = "UPDATE usuarios SET Nombre = '$Nombre' WHERE UsuarioID = '$UsuarioID'";
         if (mysqli_query($conexion, $sqlActualizarNombre)) {
-            echo json_encode(["statusNombre"=> "success", "messageNombre" => "Nombre actualizado"]);
             $actualizado = true;
         }
     }
+
     // ACTUALIZAR TELÉFONO
     if (!empty($Telefono)) {
         if (is_numeric($Telefono) && strlen($Telefono) >= 10) {
             $sqlActualizarTelefono = "UPDATE usuarios SET Telefono = '$Telefono' WHERE UsuarioID = '$UsuarioID'";
             if (mysqli_query($conexion, $sqlActualizarTelefono)) {
-                echo json_encode(["statusTelefono"=> "success", "messageTelefono" => "Teléfono actualizado"]);
                 $actualizado = true;
             }
         } else {
-            echo json_encode(["statusTelefono"=> "error", "messageTelefono" => "Teléfono inválido"]);
+            $messageTelefono = "Teléfono inválido.";
         }
     }
 
+    // Generar la respuesta final
     if ($actualizado) {
-        echo json_encode(["message" => "Datos guardados correctamente"]);
+        $response = ["message" => "Datos guardados correctamente"];
     } else {
-        echo json_encode(["message" => "No se realizaron cambios."]);
+        $response = ["message" => "No se realizaron cambios."];
     }
+
+    // Si se presentó algún error con la contraseña o teléfono, agregar los mensajes de error
+    if (isset($messageContrasena)) {
+        $response["statusContrasena"] = "error";
+        $response["messageContrasena"] = $messageContrasena;
+    }
+
+    if (isset($messageTelefono)) {
+        $response["statusTelefono"] = "error";
+        $response["messageTelefono"] = $messageTelefono;
+    }
+
+    echo json_encode($response);
+    exit;
 }
 
 mysqli_close($conexion);
