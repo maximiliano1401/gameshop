@@ -23,7 +23,7 @@
         $Confirmar_Contrasena = trim($_POST["Confirmar_Contrasena"]);
 
         // Validamos que ninguna variable esté vacái
-        $validaciones = [$Nombre, $Correo, $Contrasena, $Contrasena, $Telefono, $Edad, $Confirmar_Contrasena];
+        $validaciones = [$Nombre, $Correo, $Contrasena, $Telefono, $Edad, $Confirmar_Contrasena];
         foreach ($validaciones as $validar) {
             if (empty($validar)) {
                 echo "<script>

@@ -159,6 +159,7 @@ if (!isset($_SESSION["UsuarioID"])) {
     <div class="modal" id="modal-direcciones">
         <div class="modal-header">Editar Dirección</div>
         <div class="modal-content">
+            <input type="hidden" value="<?php echo $UsuarioID ?>" name="UsuarioID" />
             <input type="text" placeholder="Calle y número" value="<?php echo $Direccion ?>" name="Direccion" />
             <input type="text" placeholder="Ciudad" value="<?php echo $Ciudad ?>" name="Ciudad" />
             <input type="text" placeholder="Código postal" value="<?php echo $CodigoPostal ?>" name="CodigoPostal" />
