@@ -2,6 +2,7 @@
 session_start();
 // Incluir conexión
 include "conexion.php";
+include "procesos/select_datos_usuario.php";
 
 if (!isset($_SESSION["UsuarioID"])) {
     header("Location: login.php");
@@ -120,9 +121,12 @@ if (!isset($_SESSION["UsuarioID"])) {
     <div class="modal" id="modal-info">
         <div class="modal-header">Editar Información Personal</div>
         <div class="modal-content">
-            <input type="text" placeholder="Nombre completo" />
-            <input type="email" placeholder="Correo electrónico" />
-            <input type="password" placeholder="Nueva contraseña" />
+            <input type="hidden" value="<?php echo $UsuarioID ?>" name="UsuarioID" />
+            <input type="text" placeholder="Nombre completo" value="<?php echo $Nombre ?>" name="Nombre" />
+            <input type="text" placeholder="9876543210" value="<?php echo $Telefono ?>" name="Telefono" />
+            <input type="password" placeholder="Contraseña Actual" name="ContrasenaActual" />
+            <input type="password" placeholder="Nueva contraseña" name="ContrasenaNueva" />
+            <input type="password" placeholder="Confirmar Nueva contraseña" name="ConfContrasenaNueva" />
         </div>
         <div class="modal-footer">
             <button class="close-btn" onclick="closeModal()">Cancelar</button>
@@ -135,8 +139,15 @@ if (!isset($_SESSION["UsuarioID"])) {
         <div class="modal-header">Editar Información de Tarjetas</div>
         <div class="modal-content">
             <input type="text" placeholder="Número de tarjeta" />
-            <input type="text" placeholder="Nombre en la tarjeta" />
+            <input type="text" placeholder="Nombre del Titular" />
             <input type="date" placeholder="Fecha de vencimiento" />
+            <input type="number" placeholder="CVV" />
+            <input type="text" placeholder="Tipo de Tarjeta" />
+            <select name="TipoTarjeta" id="TipoTarjeta">
+                <option value="0" disabled selected>Seleccione un tipo de tarjeta</option>
+                <option value="Credito">Crédito</option>
+                <option value="Debito">Débito</option>
+            </select>
         </div>
         <div class="modal-footer">
             <button class="close-btn" onclick="closeModal()">Cancelar</button>
@@ -148,9 +159,9 @@ if (!isset($_SESSION["UsuarioID"])) {
     <div class="modal" id="modal-direcciones">
         <div class="modal-header">Editar Dirección</div>
         <div class="modal-content">
-            <input type="text" placeholder="Calle y número" />
-            <input type="text" placeholder="Ciudad" />
-            <input type="text" placeholder="Código postal" />
+            <input type="text" placeholder="Calle y número" value="<?php echo $Direccion ?>" name="Direccion" />
+            <input type="text" placeholder="Ciudad" value="<?php echo $Ciudad ?>" name="Ciudad" />
+            <input type="text" placeholder="Código postal" value="<?php echo $CodigoPostal ?>" name="CodigoPostal" />
         </div>
         <div class="modal-footer">
             <button class="close-btn" onclick="closeModal()">Cancelar</button>

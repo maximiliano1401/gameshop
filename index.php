@@ -23,12 +23,11 @@ session_start();
             echo "<a href='registro.php'>Crear cuenta</a>";
             echo "<a href='login.php'>Ingresar</a>";
         } else {
-            echo "<a href=''>" . $_SESSION["Nombre"] . "</a>";
+            echo "<a href='perfil.php'>" . $_SESSION["Nombre"] . "</a>";
             echo "<a href='procesos/cerrar_sesion.php'>Cerrar Sesión</a>";
         }
         ?>
         <a href="">Categorías</a>
-        <a href="">Ofertas</a>
         <a href="">Historial</a>
         <a href="">Mis compras</a>
     </nav>
@@ -49,7 +48,7 @@ session_start();
             </a>";
         } else {
             echo "
-            <a href='' class='nav-item'>
+            <a href='perfil.php' class='nav-item'>
                 <i class='fas fa-user'></i>
                 <span>" . $_SESSION["Nombre"] . "</span>
             </a>

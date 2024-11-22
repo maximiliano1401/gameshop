@@ -1,12 +1,11 @@
 <?php
-session_start();
 include_once "conexion.php";
 
 if (isset($_SESSION["UsuarioID"])) {
 
-    $id = $_SESSION["UsuarioID"];
+    $UsuarioID = $_SESSION["UsuarioID"];
 
-    $sql = "SELECT * FROM usuarios WHERE id = '$id'";
+    $sql = "SELECT * FROM usuarios WHERE UsuarioID = '$UsuarioID'";
     $resultado = mysqli_query($conexion, $sql);
 
     if (mysqli_num_rows($resultado) > 0) {
@@ -15,6 +14,8 @@ if (isset($_SESSION["UsuarioID"])) {
         $Nombre = $fila["Nombre"];
         $Correo = $fila["Correo"];
         $Direccion = $fila["Direccion"];
+        $Ciudad = $fila["Ciudad"];
+        $CodigoPostal = $fila["CodigoPostal"];
         $Telefono = $fila["Telefono"];
     }
 }
