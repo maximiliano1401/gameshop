@@ -138,15 +138,15 @@ if (!isset($_SESSION["UsuarioID"])) {
     <div class="modal" id="modal-tarjetas">
         <div class="modal-header">Editar Información de Tarjetas</div>
         <div class="modal-content">
-            <input type="text" placeholder="Número de tarjeta" />
-            <input type="text" placeholder="Nombre del Titular" />
-            <input type="date" placeholder="Fecha de vencimiento" />
-            <input type="number" placeholder="CVV" />
-            <input type="text" placeholder="Tipo de Tarjeta" />
+            <input type="hidden" value="<?php echo $UsuarioID ?>" name="UsuarioID" />
+            <input type="text" placeholder="Número de tarjeta" value="<?php echo $NumeroTarjeta ?>" name="NumeroTarjeta" />
+            <input type="text" placeholder="Nombre del Titular" value="<?php echo $NombreTitular ?>" name="NombreTitular" />
+            <input type="date" placeholder="Fecha de vencimiento" value="<?php echo $FechaExpiracion ?>" name="FechaExpiracion" />
+            <input type="number" placeholder="CVV" value="<?php  ?>" name="CVV" />
             <select name="TipoTarjeta" id="TipoTarjeta">
-                <option value="0" disabled selected>Seleccione un tipo de tarjeta</option>
-                <option value="Credito">Crédito</option>
-                <option value="Debito">Débito</option>
+                <option value="" disabled <?php echo ($TipoTarjeta == "") ? 'selected' : ''; ?> >Seleccione un tipo de tarjeta</option>
+                <option value="Credito" <?php echo ($TipoTarjeta == "Credito") ? 'selected' : ''; ?> >Crédito</option>
+                <option value="Debito" <?php echo ($TipoTarjeta == "Debito") ? 'selected' : ''; ?> >Débito</option>
             </select>
         </div>
         <div class="modal-footer">
