@@ -1,0 +1,39 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+}
+
+header .logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+header .logo span {
+    color: #000;
+}
+
+h1 {
+    font-size: 20px;
+    color: #333;
+}
+
+.modal-content {
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-label {
+    font-size: 14px;
+    color: #333;
+}
+
+.btn-warning {
+    background-color: #fcbf49;
+    border: none;
+}
+
+.btn-warning:hover {
+    background-color: #e5a840;
+}
