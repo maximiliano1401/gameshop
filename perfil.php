@@ -98,20 +98,20 @@ if (!isset($_SESSION["UsuarioID"])) {
             <h1 class="logo">Game<span>Shop</span></h1>
             <input type="text" placeholder="Buscar productos" class="search-bar">
             <nav class="nav-links-desktop">
-        <?php
-        if (!isset($_SESSION["Nombre"])) {
-            echo "<a href='registro.php'>Crear cuenta</a>";
-            echo "<a href='login.php'>Ingresar</a>";
-        } else {
-            echo "<a href='perfil.php'>" . $_SESSION["Nombre"] . "</a>";
-            echo "<a href='procesos/cerrar_sesion.php'>Cerrar Sesión</a>";
-        }
-        ?>
-        <a href="">Categorías</a>
-        <a href="">Carrito</a>
-        <a href="">Historial</a>
-    </nav>
-        </div>  
+                <?php
+                if (!isset($_SESSION["Nombre"])) {
+                    echo "<a href='registro.php'>Crear cuenta</a>";
+                    echo "<a href='login.php'>Ingresar</a>";
+                } else {
+                    echo "<a href='perfil.php'>" . $_SESSION["Nombre"] . "</a>";
+                    echo "<a href='procesos/cerrar_sesion.php'>Cerrar Sesión</a>";
+                }
+                ?>
+                <a href="">Categorías</a>
+                <a href="">Carrito</a>
+                <a href="">Historial</a>
+            </nav>
+        </div>
     </header>
     <!-- Barra de navegación móvil -->
     <nav class="nav-links-mobile">
@@ -140,7 +140,7 @@ if (!isset($_SESSION["UsuarioID"])) {
         ?>
 
         <a href="" class="nav-item">
-         <i class="fas fa-home"></i>
+            <i class="fas fa-home"></i>
             <span>Inicio</span>
         </a>
         <a href="" class="nav-item">
@@ -148,33 +148,29 @@ if (!isset($_SESSION["UsuarioID"])) {
             <span>Carrito</span>
         </a>
         <a href="" class="nav-item">
-        <i class="fas fa-bars"></i>
+            <i class="fas fa-bars"></i>
             <span>Categorías</span>
         </a>
     </nav>
 
-    <!-- <div class="container">
-        <div class="header">
-            Game Shop - Perfil
-        </div> -->
-        <div class="profile-info">
-            <img src="https://via.placeholder.com/140" alt="Perfil">
+    <div class="profile-info">
+        <img src="https://via.placeholder.com/140" alt="Perfil">
 
-            <button class="button" onclick="openModal('modal-info')">
-                <span class="title">Tu información y seguridad</span>
-                <span class="description">Nombre, datos y contraseña para identificarte</span>
-            </button>
+        <button class="button" onclick="openModal('modal-info')">
+            <span class="title">Tu información y seguridad</span>
+            <span class="description">Nombre, datos y contraseña para identificarte</span>
+        </button>
 
-            <button class="button" onclick="openModal('modal-tarjetas')">
-                <span class="title">Tarjetas</span>
-                <span class="description">Información de tarjetas</span>
-            </button>
+        <button class="button" onclick="openModal('modal-tarjetas')">
+            <span class="title">Tarjetas</span>
+            <span class="description">Información de tarjetas</span>
+        </button>
 
-            <button class="button" onclick="openModal('modal-direcciones')">
-                <span class="title">Dirección</span>
-                <span class="description">Direcciones</span>
-            </button>
-        </div>
+        <button class="button" onclick="openModal('modal-direcciones')">
+            <span class="title">Dirección</span>
+            <span class="description">Direcciones</span>
+        </button>
+    </div>
     </div>
 
     <!-- Modales -->
@@ -184,12 +180,14 @@ if (!isset($_SESSION["UsuarioID"])) {
     <div class="modal" id="modal-info">
         <div class="modal-header">Editar Información Personal</div>
         <div class="modal-content">
-            <input type="hidden" value="<?php echo $UsuarioID ?>" name="UsuarioID" />
-            <input type="text" placeholder="Nombre completo" value="<?php echo $Nombre ?>" name="Nombre" />
-            <input type="text" placeholder="9876543210" value="<?php echo $Telefono ?>" name="Telefono" />
-            <input type="password" placeholder="Contraseña Actual" name="ContrasenaActual" />
-            <input type="password" placeholder="Nueva contraseña" name="ContrasenaNueva" />
-            <input type="password" placeholder="Confirmar Nueva contraseña" name="ConfContrasenaNueva" />
+            <form id="actualizar_perfil">
+                <input type="hidden" value="<?php echo $UsuarioID ?>" name="UsuarioID" />
+                <input type="text" placeholder="Nombre completo" value="<?php echo $Nombre ?>" name="Nombre" />
+                <input type="text" placeholder="9876543210" value="<?php echo $Telefono ?>" name="Telefono" />
+                <input type="password" placeholder="Contraseña Actual" name="ContrasenaActual" />
+                <input type="password" placeholder="Nueva contraseña" name="ContrasenaNueva" />
+                <input type="password" placeholder="Confirmar Nueva contraseña" name="ConfContrasenaNueva" />
+            </form>
         </div>
         <div class="modal-footer">
             <button class="close-btn" onclick="closeModal()">Cancelar</button>
@@ -201,16 +199,18 @@ if (!isset($_SESSION["UsuarioID"])) {
     <div class="modal" id="modal-tarjetas">
         <div class="modal-header">Editar Información de Tarjetas</div>
         <div class="modal-content">
+        <form id="actualizar_tarjeta">
             <input type="hidden" value="<?php echo $UsuarioID ?>" name="UsuarioID" />
             <input type="text" placeholder="Número de tarjeta" value="<?php echo $NumeroTarjeta ?>" name="NumeroTarjeta" />
             <input type="text" placeholder="Nombre del Titular" value="<?php echo $NombreTitular ?>" name="NombreTitular" />
             <input type="date" placeholder="Fecha de vencimiento" value="<?php echo $FechaExpiracion ?>" name="FechaExpiracion" />
             <input type="password" placeholder="CVV" value="<?php  ?>" name="CVV" />
             <select name="TipoTarjeta" id="TipoTarjeta">
-                <option value="" disabled <?php echo ($TipoTarjeta == "") ? 'selected' : ''; ?> >Seleccione un tipo de tarjeta</option>
-                <option value="Credito" <?php echo ($TipoTarjeta == "Credito") ? 'selected' : ''; ?> >Crédito</option>
-                <option value="Debito" <?php echo ($TipoTarjeta == "Debito") ? 'selected' : ''; ?> >Débito</option>
+                <option value="" disabled <?php echo ($TipoTarjeta == "") ? 'selected' : ''; ?>>Seleccione un tipo de tarjeta</option>
+                <option value="Credito" <?php echo ($TipoTarjeta == "Credito") ? 'selected' : ''; ?>>Crédito</option>
+                <option value="Debito" <?php echo ($TipoTarjeta == "Debito") ? 'selected' : ''; ?>>Débito</option>
             </select>
+        </form>
         </div>
         <div class="modal-footer">
             <button class="close-btn" onclick="closeModal()">Cancelar</button>
@@ -222,10 +222,12 @@ if (!isset($_SESSION["UsuarioID"])) {
     <div class="modal" id="modal-direcciones">
         <div class="modal-header">Editar Dirección</div>
         <div class="modal-content">
+        <form id="actualizar_direccion">
             <input type="hidden" value="<?php echo $UsuarioID ?>" name="UsuarioID" />
             <input type="text" placeholder="Calle y número" value="<?php echo $Direccion ?>" name="Direccion" />
             <input type="text" placeholder="Ciudad" value="<?php echo $Ciudad ?>" name="Ciudad" />
             <input type="text" placeholder="Código postal" value="<?php echo $CodigoPostal ?>" name="CodigoPostal" />
+        </form>
         </div>
         <div class="modal-footer">
             <button class="close-btn" onclick="closeModal()">Cancelar</button>
