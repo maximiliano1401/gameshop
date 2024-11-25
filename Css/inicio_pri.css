@@ -1,5 +1,5 @@
-/* Reset some basic styling */
-* {
+ /* Reset some basic styling */
+ * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -56,60 +56,43 @@ header {
 .nav-links-desktop a:hover {
     text-decoration: underline;
 }
-
 /* Barra de navegación móvil */
 .nav-links-mobile {
     display: none;
 }
-
 /* Products section */
 .products {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); /* Flexible grid */
-    gap: 15px;
-    padding: 20px;
-    max-width: 1200px; /* Limit the maximum width of the product grid */
-    margin: 0 auto; /* Center the grid horizontally */
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+gap: 15px;
+padding: 20px;
 }
-
 .product {
-    background-color: white;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 10px;
-    text-align: center;
-    transition: transform 0.3s ease; /* Smooth scaling effect on hover */
+background-color: white;
+border: 1px solid #ddd;
+border-radius: 8px;
+padding: 10px;
+text-align: center;
 }
-
-.product:hover {
-    transform: translateY(-5px); /* Slight hover effect */
-}
-
 .product img {
-    max-width: 100%;
-    border-radius: 8px;
-    height: auto;
+max-width: 100%;
+border-radius: 8px;
 }
-
 .product p {
-    font-size: 14px;
-    margin: 10px 0;
-    color: #333;
+font-size: 14px;
+margin: 10px 0;
+color: #333;
 }
-
 .price {
-    color: #e60000;
-    font-weight: bold;
+color: #e60000;
+font-weight: bold;
 }
-
 .original-price {
-    color: #999;
-    text-decoration: line-through;
-    font-size: 12px;
-    margin-left: 5px;
+color: #999;
+text-decoration: line-through;
+font-size: 12px;
+margin-left: 5px;
 }
-
-/* Responsive Design for Mobile and Tablet */
 @media (max-width: 780px) {
     .search-bar {
         width: 90%;
@@ -119,6 +102,9 @@ header {
         display: none; /* Oculta la barra de escritorio */
     }
 
+    #imagenesxd {
+        display: none; /* Oculta la barra de escritorio */
+    }
     .nav-links-mobile {
         display: flex;
         justify-content: space-around;
@@ -148,23 +134,7 @@ header {
     .nav-links-mobile .nav-item:hover {
         color: #fff5e6;
     }
-
-    /* Ajuste para 2 productos por fila en pantallas pequeñas */
-    .products {
-        grid-template-columns: repeat(2, 1fr); /* Asegura que haya al menos dos productos por fila */
-        gap: 10px; /* Ajuste del espacio entre productos */
-        padding: 10px;
-    }
-
-    .product {
-        padding: 15px;
-    }
-
-    .product img {
-        max-height: 200px; /* Limita la altura de las imágenes en móviles */
-    }
 }
-
 /* Banner styling */
 .banner {
     background-color: #4b3c6b;
