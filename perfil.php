@@ -90,10 +90,72 @@ if (!isset($_SESSION["UsuarioID"])) {
 </head>
 
 <body>
-    <div class="container">
+
+    <!-- Barra de navegación de escritorio -->
+    <header>
+        <div class="header-container">
+            <h1 class="logo">Game<span>Shop</span></h1>
+            <input type="text" placeholder="Buscar productos" class="search-bar">
+            <nav class="nav-links-desktop">
+        <?php
+        if (!isset($_SESSION["Nombre"])) {
+            echo "<a href='registro.php'>Crear cuenta</a>";
+            echo "<a href='login.php'>Ingresar</a>";
+        } else {
+            echo "<a href='perfil.php'>" . $_SESSION["Nombre"] . "</a>";
+            echo "<a href='procesos/cerrar_sesion.php'>Cerrar Sesión</a>";
+        }
+        ?>
+        <a href="">Categorías</a>
+        <a href="">Carrito</a>
+        <a href="">Historial</a>
+    </nav>
+        </div>  
+    </header>
+    <!-- Barra de navegación móvil -->
+    <nav class="nav-links-mobile">
+        <?php
+        if (!isset($_SESSION["Nombre"])) {
+            echo "
+            <a href='registro.php' class='nav-item'>
+                <i class='fas fa-user-plus'></i>
+                <span>Crear</span>
+            </a>
+            <a href='login.php' class='nav-item'>
+                <i class='fas fa-sign-in-alt'></i>
+                <span>Ingresar</span>
+            </a>";
+        } else {
+            echo "
+            <a href='perfil.php' class='nav-item'>
+                <i class='fas fa-user'></i>
+                <span>" . $_SESSION["Nombre"] . "</span>
+            </a>
+            <a href='procesos/cerrar_sesion.php' class='nav-item'>
+                <i class='fas fa-sign-out-alt'></i>
+                <span>Salir</span>
+            </a>";
+        }
+        ?>
+
+        <a href="" class="nav-item">
+         <i class="fas fa-home"></i>
+            <span>Inicio</span>
+        </a>
+        <a href="" class="nav-item">
+            <i class="fas fa-shopping-cart"></i>
+            <span>Carrito</span>
+        </a>
+        <a href="" class="nav-item">
+        <i class="fas fa-bars"></i>
+            <span>Categorías</span>
+        </a>
+    </nav>
+
+    <!-- <div class="container">
         <div class="header">
             Game Shop - Perfil
-        </div>
+        </div> -->
         <div class="profile-info">
             <img src="https://via.placeholder.com/140" alt="Perfil">
 
