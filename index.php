@@ -28,8 +28,8 @@ session_start();
         }
         ?>
         <a href="">Categorías</a>
+        <a href="">Carrito</a>
         <a href="">Historial</a>
-        <a href="">Mis compras</a>
     </nav>
         </div>  
     </header>
@@ -65,7 +65,7 @@ session_start();
         </a>
         <a href="" class="nav-item">
             <i class="fas fa-shopping-cart"></i>
-            <span>Compras</span>
+            <span>Carrito</span>
         </a>
         <a href="" class="nav-item">
         <i class="fas fa-bars"></i>
