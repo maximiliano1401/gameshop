@@ -154,7 +154,6 @@ if (!isset($_SESSION["UsuarioID"])) {
     </nav>
 
     <div class="profile-info">
-        <img src="https://via.placeholder.com/140" alt="Perfil">
 
         <button class="button" onclick="openModal('modal-info')">
             <span class="title">Tu información y seguridad</span>
