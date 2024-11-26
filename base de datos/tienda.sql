@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 13-11-2024 a las 06:17:36
+-- Tiempo de generación: 26-11-2024 a las 00:43:57
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -33,6 +33,19 @@ CREATE TABLE `carritodecompras` (
   `ProductoID` int(11) DEFAULT NULL,
   `Cantidad` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `carritodecompras`
+--
+
+INSERT INTO `carritodecompras` (`CarritoID`, `UsuarioID`, `ProductoID`, `Cantidad`) VALUES
+(1, 7, 3, 1),
+(2, 7, 1, 1),
+(3, 7, 5, 1),
+(4, 7, 2, 1),
+(6, 7, 20, 1),
+(7, 7, 4, 1),
+(8, 7, 7, 1);
 
 -- --------------------------------------------------------
 
@@ -100,7 +113,7 @@ CREATE TABLE `productos` (
 
 INSERT INTO `productos` (`ProductoID`, `Nombre`, `Descripcion`, `Precio`, `Stock`, `ImagenURL`, `Categoria`) VALUES
 (1, 'Easysmx X15 Pc Controller - Enhanced Wireless Bluetooth', 'Producto IMPORTADO***\r\n\r\nContenido:\r\nEasySMX X15 PC Controller - Enhanced Wireless Bluetooth Controller with Hall Joysticks/Hall Triggers/RGB Lighting - No Stick Drift, No Dead Zone - Work for Windows', 1859.76, 10, 'img_bd/ControlEasysmx.webp', 'CONTROLES'),
-(2, 'Easysmx 9110 Control Inalámbrico Joystick Para Pc Windows 7/8/10/11/12/android/ps3/TV Negro Mando de', 'Descripción\n\n1. Gran compatibilidad: el controlador de juego inalámbrico funciona con PC,Nintendo Switch y PS3, Android, Vista, Steam, Steam Deck. Atención: para los dispositivos Android, debe Andro', 594.00, 10, 'img_bd/ControlEasysmx9110.webp', 'CONTROLES'),
+(2, 'Easysmx 9110 Control Inalámbrico Joystick Para Pc Windows', 'Descripción\n\n1. Gran compatibilidad: el controlador de juego inalámbrico funciona con PC,Nintendo Switch y PS3, Android, Vista, Steam, Steam Deck. Atención: para los dispositivos Android, debe Andro', 594.00, 10, 'img_bd/ControlEasysmx9110.webp', 'CONTROLES'),
 (3, 'Control Inalámbrico Xbox Series S/x/one Ghost Cipher Blanco', 'Descubre misterios con el Control inalámbrico Xbox: Edición especial Ghost Cipher, con un diseño transparente, un interior plateado, detalles metálicos y mucho más. Mira a través de la carcasa superio', 1797.00, 10, 'img_bd/ControlXboxGhost.webp', 'CONTROLES'),
 (4, 'Control Para Xbox One Alambrico Serie Xs Solo Por Usb.', 'Acerca de este artículo\nCon licencia oficial para Xbox\nDos motores de vibración\nConector de auriculares estéreo de 3,5 mm\nCable USB extraíble de 3 metros (10 pies)\n\nPowerA es una marca líder rec', 798.00, 10, 'img_bd/ControlXbox.jpg', 'CONTROLES'),
 (5, 'Control joystick ACCO Brands PowerA Enhanced Wired Controller for Xbox One black', 'PowerA es una marca líder reconocida por la venta de accesorios para videojuegos, productos accesibles y bien diseñados. Caracterizada por una fuerte pasión hacia los juegos, tiene la misión de brinda', 799.00, 10, 'img_bd/ControlAccoBlack.webp', 'CONTROLES'),
@@ -181,13 +194,20 @@ CREATE TABLE `superusuarios` (
 CREATE TABLE `tarjetas` (
   `TarjetaID` int(11) NOT NULL,
   `UsuarioID` int(11) DEFAULT NULL,
-  `NumeroTarjeta` varchar(100) NOT NULL,
-  `NombreTitular` varchar(100) NOT NULL,
-  `FechaExpiracion` date NOT NULL,
-  `CVV` varchar(4) NOT NULL,
+  `NumeroTarjeta` varchar(100) DEFAULT NULL,
+  `NombreTitular` varchar(100) DEFAULT NULL,
+  `FechaExpiracion` date DEFAULT NULL,
+  `CVV` varchar(4) DEFAULT NULL,
   `TipoTarjeta` varchar(50) DEFAULT NULL,
   `FechaRegistro` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `tarjetas`
+--
+
+INSERT INTO `tarjetas` (`TarjetaID`, `UsuarioID`, `NumeroTarjeta`, `NombreTitular`, `FechaExpiracion`, `CVV`, `TipoTarjeta`, `FechaRegistro`) VALUES
+(1, 7, '405012345678', 'Maximiliano Perez', '2025-11-25', '000', 'Debito', '2024-11-22 02:08:02');
 
 -- --------------------------------------------------------
 
@@ -197,10 +217,13 @@ CREATE TABLE `tarjetas` (
 
 CREATE TABLE `usuarios` (
   `UsuarioID` int(11) NOT NULL,
-  `Nombre` varchar(100) DEFAULT NULL,
-  `Correo` varchar(100) DEFAULT NULL,
-  `Contrasena` varchar(100) DEFAULT NULL,
+  `Nombre` varchar(100) NOT NULL,
+  `Edad` int(3) NOT NULL,
+  `Correo` varchar(100) NOT NULL,
+  `Contrasena` varchar(100) NOT NULL,
   `Direccion` varchar(255) DEFAULT NULL,
+  `Ciudad` varchar(100) DEFAULT NULL,
+  `CodigoPostal` int(5) DEFAULT NULL,
   `Telefono` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -208,11 +231,12 @@ CREATE TABLE `usuarios` (
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`UsuarioID`, `Nombre`, `Correo`, `Contrasena`, `Direccion`, `Telefono`) VALUES
-(1, 'Maximiliano', 'max@dominio.com', '12345678', 'San Francisco', '9817517178'),
-(5, 'Mario Segovia', 'mario@dominio.com', '$2y$10$ZvZKif3bm84g/N/OyTyUmu7bTf2xIlGOmuPTdjha06m7wZJ.mZlum', 'Campeche', '987654321'),
-(7, 'Maximiliano', 'maxi@dominio.com', '$2y$10$B5gjVIEIZ0jWnCBL/UlNeOQ0z47DVmc51qzZycruvcZVNDsJkczXq', 'San Francisco', '987654321'),
-(8, 'Max', 'max1@dominio.com', '$2y$10$nfRr2mcGaPqcUPQnSNe.Z.GPuzoLGnJboF5z4QJiAo/I8.ljzPAC.', NULL, '1234567890');
+INSERT INTO `usuarios` (`UsuarioID`, `Nombre`, `Edad`, `Correo`, `Contrasena`, `Direccion`, `Ciudad`, `CodigoPostal`, `Telefono`) VALUES
+(1, 'Maximiliano', 27, 'max@dominio.com', '12345678', 'San Francisco', NULL, NULL, '9817517178'),
+(5, 'Mario Segovia', 27, 'mario@dominio.com', '$2y$10$ZvZKif3bm84g/N/OyTyUmu7bTf2xIlGOmuPTdjha06m7wZJ.mZlum', 'Campeche', NULL, NULL, '987654321'),
+(7, 'Maximiliano', 30, 'maxi@dominio.com', '$2y$10$B5gjVIEIZ0jWnCBL/UlNeOQ0z47DVmc51qzZycruvcZVNDsJkczXq', 'San Francisco', 'Campeche', 24010, '987654321'),
+(8, 'Max', 27, 'max1@dominio.com', '$2y$10$nfRr2mcGaPqcUPQnSNe.Z.GPuzoLGnJboF5z4QJiAo/I8.ljzPAC.', NULL, NULL, NULL, '1234567890'),
+(9, 'Prueba', 30, 'prueba@gmail.com', '$2y$10$YdcXcw5E/lmntQPtzpjy0.NeJgUrKDgP0T7xC5CCaSf.zP/uwJela', NULL, NULL, NULL, '1234567890');
 
 --
 -- Índices para tablas volcadas
@@ -284,7 +308,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `carritodecompras`
 --
 ALTER TABLE `carritodecompras`
-  MODIFY `CarritoID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `CarritoID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `detallesdepedido`
@@ -320,13 +344,13 @@ ALTER TABLE `superusuarios`
 -- AUTO_INCREMENT de la tabla `tarjetas`
 --
 ALTER TABLE `tarjetas`
-  MODIFY `TarjetaID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `TarjetaID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `UsuarioID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `UsuarioID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Restricciones para tablas volcadas
