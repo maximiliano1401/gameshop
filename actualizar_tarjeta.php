@@ -45,9 +45,10 @@
         $resultado = mysqli_query($conexion, $sqlTarjetaSeleccion);
         // Si existe la actualizará
         if (mysqli_num_rows($resultado) > 0) {
-        $sqlTarjeta = "UPDATE tarjetas 
-        SET NumeroTarjeta = '$NumeroTarjeta', NombreTitular = '$NombreTitular', FechaExpiracion = $FechaExpiracion, CVV = $CVV, TipoTarjeta = $TipoTarjeta 
-        WHERE UsuarioID = '$UsuarioID'";
+            $sqlTarjeta = "UPDATE tarjetas 
+            SET NumeroTarjeta = '$NumeroTarjeta', NombreTitular = '$NombreTitular', FechaExpiracion = '$FechaExpiracion', CVV = '$CVV', TipoTarjeta = '$TipoTarjeta' 
+            WHERE UsuarioID = '$UsuarioID'";
+            
         // Sino la insertará/registrará
         } else {
             $sqlTarjeta = "INSERT INTO tarjetas (UsuarioID, NumeroTarjeta, NombreTitular, FechaExpiracion, CVV, TipoTarjeta)
@@ -55,12 +56,11 @@
         }
         
         // Se ejecuta la consulta
-        if(mysqli_query($conexion, $sqlTarjeta)) {
-            echo json_encode(["status"=> "success","message"=> "Tarjeta actualizada."]);
+        if (mysqli_query($conexion, $sqlTarjeta)) {
+            echo json_encode(["status" => "success", "message" => "Tarjeta actualizada."]);
         } else {
-            echo json_encode(["status"=> "error","message"=> "Error al actualizar tarjeta."]);
-        }
-
+            echo json_encode(["status" => "error", "message" => "Error al actualizar tarjeta: "]);
+        }        
     }
 
     // Cerrar conexion
