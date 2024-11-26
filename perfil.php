@@ -245,7 +245,7 @@ if (!isset($_SESSION["UsuarioID"])) {
                     <!-- El mensaje se mostrará aquí -->
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="document.location.reload();">Cerrar</button>
                 </div>
             </div>
         </div>
