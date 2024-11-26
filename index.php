@@ -28,7 +28,7 @@ session_start();
         }
         ?>
         <a href="">Categorías</a>
-        <a href="">Carrito</a>
+        <a href="carrito_compras.php">Carrito</a>
         <a href="">Historial</a>
     </nav>
         </div>  
@@ -63,7 +63,7 @@ session_start();
          <i class="fas fa-home"></i>
             <span>Inicio</span>
         </a>
-        <a href="" class="nav-item">
+        <a href="carrito_compras.php" class="nav-item">
             <i class="fas fa-shopping-cart"></i>
             <span>Carrito</span>
         </a>

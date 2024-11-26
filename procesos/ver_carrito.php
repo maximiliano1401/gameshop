@@ -1,7 +1,6 @@
 <?php
-include('conexion.php');
+include_once('conexion.php');
 
-session_start();
 if (!isset($_SESSION['UsuarioID'])) {
     echo "Por favor, inicia sesión primero.";
     exit;
@@ -31,23 +30,18 @@ $resultado = mysqli_query($conexion, $sql);
 
 // Comprobar si se han encontrado productos en el carrito
 if (mysqli_num_rows($resultado) > 0) {
-    echo "<h1>Mi Carrito de Compras</h1>";
-    echo "<table border='1' cellpadding='10'>
-            <tr>
-                <th>Imagen</th>
-                <th>Nombre</th>
-                <th>Precio</th>
-
-            </tr>";
 
     // Mostrar los productos del carrito
     while ($fila = mysqli_fetch_assoc($resultado)) {
-        echo "<tr>
-        <td><img src='" . $fila['ImagenURL'] . "' width='100'></td>
-        <td>" . $fila['Producto'] . "</td>
-        <td>$" . $fila['PrecioUnitario'] . "</td>
-        </tr>";
+        echo "<div class='cart-item'>
+            <img src='" . $fila['ImagenURL'] . "' alt='" . $fila['Producto'] . "'>
+            <div class='item-details'>
+            <h3>" . $fila['Producto'] . "</h3>
+            <p>$" . $fila['PrecioUnitario'] . "</p>
+            </div>
+            </div>";
     }
+
 
     // Sumar el total del carrito
     $totalCarritoSQL = "
@@ -57,19 +51,18 @@ if (mysqli_num_rows($resultado) > 0) {
         WHERE c.UsuarioID = $usuarioID
     ";
 
-    $totalCarritoResultado = mysqli_query($conexion, $totalCarritoSQL); 
+    $totalCarritoResultado = mysqli_query($conexion, $totalCarritoSQL);
     $totalCarrito = mysqli_fetch_assoc($totalCarritoResultado);
     // $totalCarrito = $totalCarritoResultado->fetch_assoc()['TotalCarrito'];
 
-    echo "</table>";
-
-    // Mostrar total del carrito
-    echo "<h2>Total del Carrito: $" . $totalCarrito['TotalCarrito'] . "</h2>";
-    echo "<a href='pago.php'>Proceder al Pago</a>";
+    echo "
+    <div class='subtotal'>
+    <p>Subtotal: <span>$" . $totalCarrito['TotalCarrito'] . " </span></p>
+    <button>Pagar</button>
+    </div>";
 
 } else {
     echo "<p>No hay productos en tu carrito.</p>";
 }
 
 mysqli_close($conexion);
-?>
