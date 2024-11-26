@@ -152,9 +152,7 @@ if (!isset($_SESSION["UsuarioID"])) {
             <span>Categorías</span>
         </a>
     </nav>
-
     <div class="profile-info">
-
         <button class="button" onclick="openModal('modal-info')">
             <span class="title">Tu información y seguridad</span>
             <span class="description">Nombre, datos y contraseña para identificarte</span>
@@ -190,7 +188,7 @@ if (!isset($_SESSION["UsuarioID"])) {
         </div>
         <div class="modal-footer">
             <button class="close-btn" onclick="closeModal()">Cancelar</button>
-            <button class="save-btn">Guardar</button>
+            <button class="save-btn" onclick="actualizarPerfil()">Guardar </button>
         </div>
     </div>
 
@@ -213,7 +211,7 @@ if (!isset($_SESSION["UsuarioID"])) {
         </div>
         <div class="modal-footer">
             <button class="close-btn" onclick="closeModal()">Cancelar</button>
-            <button class="save-btn">Guardar</button>
+            <button class="save-btn" onclick ="actualizarTarjeta()">Guardar </button>
         </div>
     </div>
 
@@ -230,22 +228,118 @@ if (!isset($_SESSION["UsuarioID"])) {
         </div>
         <div class="modal-footer">
             <button class="close-btn" onclick="closeModal()">Cancelar</button>
-            <button class="save-btn">Guardar</button>
+            <button class="save-btn" onclick ="actualizarDireccion()">Guardar </button>
+        </div>
+    </div>
+    <!-- modal asquerso -->
+    <div class="modal fade" id="responseModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalLabel">Mensaje</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="modal-message">
+                    <!-- El mensaje se mostrará aquí -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
         </div>
     </div>
 
+    <!-- Agregar enlaces a jQuery y Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+
     <script>
-        function openModal(modalId) {
-            document.getElementById(modalId).classList.add('modal-active');
-            document.getElementById('modal-overlay').classList.add('modal-active');
+    function actualizarPerfil() {
+        var datos = new FormData(document.getElementById("actualizar_perfil"));
+        fetch('actualizar_usuario.php', {
+            method: 'POST',
+            body: datos
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                mostrarModal(data.message, 'success'); 
+            } else {
+                mostrarModal(data.message, 'error'); 
+            }
+        })
+        .catch(error => {
+            mostrarModal("Ocurrió un error al intentar registrar al usuario. Intente de nuevo.", 'error');  
+        });
+    }
+
+    function actualizarTarjeta() {
+        var datos = new FormData(document.getElementById("actualizar_tarjeta"));
+        fetch('actualizar_tarjeta.php', {
+            method: 'POST',
+            body: datos
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                mostrarModal(data.message, 'success');
+            } else {
+                mostrarModal(data.message, 'error');
+            }
+        })
+        .catch(error => {
+            mostrarModal("Ocurrió un error al intentar registrar la tarjeta. Intente de nuevo.", 'error');
+        });
+    }
+
+    function actualizarDireccion() {
+        var datos = new FormData(document.getElementById("actualizar_direccion"));
+        fetch('actualizar_direccion.php', { 
+            method: 'POST',
+            body: datos
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                mostrarModal(data.message, 'success');
+            } else {
+                mostrarModal(data.message, 'error');
+            }
+        })
+        .catch(error => {
+            mostrarModal("Ocurrió un error al intentar registrar la dirección. Intente de nuevo.", 'error');
+        });
+    }
+
+    // Mostrar el mensaje del modal y aplicar el estilo según el status
+    function mostrarModal(mensaje, tipo) {
+        const modalMessage = document.getElementById("modal-message");
+        modalMessage.textContent = mensaje;
+        
+        // Cambiar el estilo del modal dependiendo del tipo (éxito o error)
+        if (tipo === 'success') {
+            modalMessage.style.color = "green";  // Éxito: color verde
+        } else {
+            modalMessage.style.color = "red";  // Error: color rojo
         }
 
-        function closeModal() {
-            const modals = document.querySelectorAll('.modal');
-            modals.forEach(modal => modal.classList.remove('modal-active'));
-            document.getElementById('modal-overlay').classList.remove('modal-active');
-        }
-    </script>
+        // Mostrar el modal usando Bootstrap
+        $('#responseModal').modal('show');
+    }
+
+    function openModal(modalId) {
+        document.getElementById(modalId).classList.add('modal-active');
+        document.getElementById('modal-overlay').classList.add('modal-active');
+    }
+
+    function closeModal() {
+        const modals = document.querySelectorAll('.modal');
+        modals.forEach(modal => modal.classList.remove('modal-active'));
+        document.getElementById('modal-overlay').classList.remove('modal-active');
+    }
+</script>
+
 </body>
-
 </html>
