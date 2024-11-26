@@ -28,8 +28,15 @@ if (isset($_SESSION["UsuarioID"])) {
         $NumeroTarjeta = $fila_tarjeta["NumeroTarjeta"];
         $NombreTitular = $fila_tarjeta["NombreTitular"];
         $FechaExpiracion = $fila_tarjeta["FechaExpiracion"];
-        $CVV = $fila_tarjeta["CVV"];
         $TipoTarjeta = $fila_tarjeta["TipoTarjeta"];
+        $CVV = $fila_tarjeta["CVV"];
+
+    } else {
+        $NumeroTarjeta = "";
+        $NombreTitular = "";
+        $FechaExpiracion = "";
+        $TipoTarjeta = "";
+        $CVV = "";
     }
 }
 

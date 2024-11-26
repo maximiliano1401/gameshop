@@ -28,21 +28,34 @@
             }
         }
 
+        // valida el número de la tarjeta
         if (!is_numeric($NumeroTarjeta) || strlen($NumeroTarjeta) < 13 || $NumeroTarjeta < 0) {
             echo json_encode(["status" => "error", "message" => "Ingrese una tarjeta válida."]);
             exit;
         }
         
+        // "valida" el cvv
         if (!is_numeric($CVV) || strlen($CVV) < 3 || $CVV < 0) {
             echo json_encode(["status" => "error", "message" => "No pudimos validar la tarjeta, compruebe los datos."]);
             exit;
         }
 
-        $sqlDireccion = "UPDATE tarjetas 
+        // Busca si el usuario ya tiene una tarjeta guardada 
+        $sqlTarjetaSeleccion = "SELECT * FROM tarjetas WHERE UsuarioID = '$UsuarioID'";
+        $resultado = mysqli_query($conexion, $sqlTarjetaSeleccion);
+        // Si existe la actualizará
+        if (mysqli_num_rows($resultado) > 0) {
+        $sqlTarjeta = "UPDATE tarjetas 
         SET NumeroTarjeta = '$NumeroTarjeta', NombreTitular = '$NombreTitular', FechaExpiracion = $FechaExpiracion, CVV = $CVV, TipoTarjeta = $TipoTarjeta 
         WHERE UsuarioID = '$UsuarioID'";
+        // Sino la insertará/registrará
+        } else {
+            $sqlTarjeta = "INSERT INTO tarjetas (UsuarioID, NumeroTarjeta, NombreTitular, FechaExpiracion, CVV, TipoTarjeta)
+            VALUES ('$UsuarioID', '$NumeroTarjeta', '$NombreTitular', '$FechaExpiracion', '$CVV', '$TipoTarjeta')";
+        }
         
-        if(mysqli_query($conexion, $sqlDireccion)) {
+        // Se ejecuta la consulta
+        if(mysqli_query($conexion, $sqlTarjeta)) {
             echo json_encode(["status"=> "success","message"=> "Tarjeta actualizada."]);
         } else {
             echo json_encode(["status"=> "error","message"=> "Error al actualizar tarjeta."]);
