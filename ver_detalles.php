@@ -68,7 +68,7 @@ include "procesos/ver_detalle_producto.php";
         }
         ?>
 
-        <a href="" class="nav-item">
+        <a href="index.php" class="nav-item">
          <i class="fas fa-home"></i>
             <span>Inicio</span>
         </a>
