@@ -24,6 +24,8 @@ header('Content-Type: application/json');
                 $_SESSION['Correo'] = $fila['Correo'];
                 $_SESSION['Nombre'] = $fila['Nombre'];
                 $_SESSION['Direccion'] = $fila['Direccion'];
+                $_SESSION['Ciudad'] = $fila['Ciudad'];
+                $_SESSION['CodigoPostal'] = $fila['CodigoPostal'];
                 $_SESSION['Telefono'] = $fila['Telefono'];
 
                 echo json_encode(["status" => "success", "message" => "Inicio de sesión exitoso"]);
