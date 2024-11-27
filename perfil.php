@@ -178,6 +178,7 @@ if (!isset($_SESSION["UsuarioID"])) {
     <!-- Modales -->
     <div class="modal-overlay" id="modal-overlay"></div>
 
+    <!-- MODALES DE LOS FORMULARIOS -->
     <!-- Modal Información -->
     <div class="modal" id="modal-info">
         <div class="modal-header">Editar Información Personal</div>
@@ -250,7 +251,8 @@ if (!isset($_SESSION["UsuarioID"])) {
             <button class="save-btn" onclick ="actualizarDireccion()">Guardar </button>
         </div>
     </div>
-    <!-- modal asquerso -->
+    <!-- FIN DE LOS MODALES DE LOS FORMULARIOS -->
+    <!-- modal De Respuesta -->
     <div class="modal fade" id="responseModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">

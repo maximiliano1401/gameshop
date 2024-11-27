@@ -1,16 +1,9 @@
  <?php
-    session_start();
-    // Incluir conexión
-    include "conexion.php";
-
-
-    $correoError = "";
-    $contrasenaError = "";
-
-    if (isset($_SESSION["UsuarioID"])) {
-        header("Location: index.php");
-        exit;
-    }
+session_start();
+include "conexion.php";
+header('Content-Type: application/json');
+    // $correoError = "";
+    // $contrasenaError = "";
 
     // Procesar login
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -33,14 +26,15 @@
                 $_SESSION['Direccion'] = $fila['Direccion'];
                 $_SESSION['Telefono'] = $fila['Telefono'];
 
-                header("Location: index.php");
+                echo json_encode(["status" => "success", "message" => "Inicio de sesión exitoso"]);
+                exit();
             } else {
                 // En caso de no coincidir contraseñas
-                $contrasenaError = "Contraseña incorrecta";
+                echo json_encode(["status" => "error", "message" => "Contraseña incorrecta"]);
             }
         } else {
             // En caso de no existir datos con ese correo
-            $correoError = "Correo no existe";
+            echo json_encode(["status" => "error", "message" => "Usuario no registrado"]);
         }
     }
 
