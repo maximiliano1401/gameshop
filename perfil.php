@@ -198,7 +198,7 @@ if (!isset($_SESSION["UsuarioID"])) {
     <div class="modal" id="modal-segurity">
         <div class="modal-header">Editar Información Personal</div>
         <div class="modal-content">
-            <form id="actualizar_perfil">
+            <form id="actualizar_contrasena">
                 <input type="hidden" value="<?php echo $UsuarioID ?>" name="UsuarioID" />
                 <input type="password" placeholder="Contraseña Actual" name="ContrasenaActual" />
                 <input type="password" placeholder="Nueva contraseña" name="ContrasenaNueva" />
@@ -273,6 +273,25 @@ if (!isset($_SESSION["UsuarioID"])) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
+        function actualizarContrasena(){
+            var datos = new FormData(document.getElementById("actualizar_contrasena"));
+        fetch('actualizar_contrasena.php', {
+            method: 'POST',
+            body: datos
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                mostrarModal(data.message, 'success'); 
+            } else {
+                mostrarModal(data.message, 'error'); 
+            }
+        })
+        .catch(error => {
+            mostrarModal("Ocurrió un error al intentar registrar al usuario. Intente de nuevo.", 'error');  
+        });
+
+        }
     function actualizarPerfil() {
         var datos = new FormData(document.getElementById("actualizar_perfil"));
         fetch('actualizar_usuario.php', {
