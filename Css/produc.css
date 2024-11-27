@@ -193,6 +193,10 @@ header {
     margin-top: 30px;
 }
 
+.productos-relacionados a{
+    text-decoration: none;
+}
+
 .productos-relacionados h3 {
     font-size: 20px;
     color: #333;
