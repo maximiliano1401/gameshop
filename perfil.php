@@ -353,14 +353,6 @@ if (!isset($_SESSION["UsuarioID"])) {
     function mostrarModal(mensaje, tipo) {
         const modalMessage = document.getElementById("modal-message");
         modalMessage.textContent = mensaje;
-        
-        // Cambiar el estilo del modal dependiendo del tipo (éxito o error)
-        if (tipo === 'success') {
-            modalMessage.style.color = "green";  // Éxito: color verde
-        } else {
-            modalMessage.style.color = "red";  // Error: color rojo
-        }
-
         // Mostrar el modal usando Bootstrap
         $('#responseModal').modal('show');
     }
