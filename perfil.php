@@ -154,8 +154,13 @@ if (!isset($_SESSION["UsuarioID"])) {
     </nav>
     <div class="profile-info">
         <button class="button" onclick="openModal('modal-info')">
-            <span class="title">Tu información y seguridad</span>
-            <span class="description">Nombre, datos y contraseña para identificarte</span>
+            <span class="title">Tu información</span>
+            <span class="description">Nombre y teléfono</span>
+        </button>
+
+        <button class="button" onclick="openModal('modal-segurity')">
+            <span class="title">Seguridad</span>
+            <span class="description">Contraseña para identificarte</span>
         </button>
 
         <button class="button" onclick="openModal('modal-tarjetas')">
@@ -181,6 +186,20 @@ if (!isset($_SESSION["UsuarioID"])) {
                 <input type="hidden" value="<?php echo $UsuarioID ?>" name="UsuarioID" />
                 <input type="text" placeholder="Nombre completo" value="<?php echo $Nombre ?>" name="Nombre" />
                 <input type="text" placeholder="9876543210" value="<?php echo $Telefono ?>" name="Telefono" />
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button class="close-btn" onclick="closeModal()">Cancelar</button>
+            <button class="save-btn" onclick="actualizarPerfil()">Guardar </button>
+        </div>
+    </div>
+
+    <!-- Modal Seguridad -->
+    <div class="modal" id="modal-segurity">
+        <div class="modal-header">Editar Información Personal</div>
+        <div class="modal-content">
+            <form id="actualizar_perfil">
+                <input type="hidden" value="<?php echo $UsuarioID ?>" name="UsuarioID" />
                 <input type="password" placeholder="Contraseña Actual" name="ContrasenaActual" />
                 <input type="password" placeholder="Nueva contraseña" name="ContrasenaNueva" />
                 <input type="password" placeholder="Confirmar Nueva contraseña" name="ConfContrasenaNueva" />
@@ -188,7 +207,7 @@ if (!isset($_SESSION["UsuarioID"])) {
         </div>
         <div class="modal-footer">
             <button class="close-btn" onclick="closeModal()">Cancelar</button>
-            <button class="save-btn" onclick="actualizarPerfil()">Guardar </button>
+            <button class="save-btn" onclick="actualizarContrasena()">Guardar </button>
         </div>
     </div>
 
@@ -237,9 +256,7 @@ if (!isset($_SESSION["UsuarioID"])) {
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="modalLabel">Mensaje</h5>
-                    <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button> -->
+
                 </div>
                 <div class="modal-body" id="modal-message">
                     <!-- El mensaje se mostrará aquí -->
