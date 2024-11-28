@@ -116,6 +116,8 @@ include "procesos/ver_detalle_producto.php";
             </div>
         </section>
     </main>
+
+    <p style="margin-top: 100px;"></p>
 </body>
 
 </html>

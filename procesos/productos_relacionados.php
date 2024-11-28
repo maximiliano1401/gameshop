@@ -4,7 +4,7 @@ include_once("conexion.php");
 $sql_relacionados = "SELECT * FROM productos 
                     WHERE Categoria = '$Categoria' 
                     AND ProductoID != '$id'
-                    LIMIT 5";
+                    LIMIT 4";
                     
 $productos_relacionados_resultado = mysqli_query($conexion, $sql_relacionados);
 

@@ -67,6 +67,7 @@ header {
     gap: 15px;
     padding: 20px;
     }
+
     .product {
         background-color: white;
         border: 1px solid #ddd;
@@ -145,6 +146,24 @@ margin-left: 5px;
     .nav-links-mobile .nav-item:hover {
         color: #fff5e6;
     }
+
+        /* Modificar el grid para pantallas pequeñas */
+        .products {
+            grid-template-columns: repeat(2, 1fr); /* Dos columnas en lugar de múltiples columnas automáticas */
+        }
+    
+        .product {
+            max-width: 180px; /* Elimina la restricción de ancho máximo */
+        }
+    
+        .product img {
+            width: 100%; /* Ajusta la altura para pantallas pequeñas */
+        }
+    
+        .product p {
+            max-width: 160px; /* Ajusta el ancho máximo del texto */
+            font-size: 12px; /* Reduce el tamaño de la fuente para pantallas pequeñas */
+        }
 }
 /* Banner styling */
 .banner {
