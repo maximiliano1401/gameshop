@@ -218,18 +218,65 @@ header {
 }
 
 .producto-relacionado img {
-    max-width: 100%;
+    width: 100%;
+    height: 200px; /* Define una altura uniforme para todas las imágenes */
+    object-fit: contain; /* Ajusta la imagen para que se recorte sin deformarse */
     border-radius: 8px;
-    margin-bottom: 10px;
 }
 
 .producto-relacionado p {
-    font-size: 14px;
+    font-size: 14px; /* Tamaño de fuente legible */
+    margin: 10px 0;
     color: #333;
+    white-space: nowrap; /* Evita que el texto pase a otra línea */
+    overflow: hidden; /* Oculta el texto que se salga del contenedor */
+    text-overflow: ellipsis; /* Añade "..." al final del texto largo */
+    max-width: 180px; /* Ajusta el ancho máximo para mantener la uniformidad */
 }
 
 .producto-relacionado .precio {
     color: #e60000;
     font-weight: bold;
     font-size: 16px;
+}
+
+@media (max-width: 780px) {
+    /* Sección de productos relacionados en pantallas móviles */
+    .productos-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* Cambia de flex a grid con 2 columnas */
+        gap: 15px;
+    }
+
+    .producto-relacionado {
+        background-color: white;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 10px;
+        text-align: center;
+        width: auto; /* Eliminar el ancho fijo para que se ajuste mejor */
+    }
+
+    .producto-relacionado img {
+        width: 100%;
+        height: 180px; /* Ajusta la altura de las imágenes para pantallas más pequeñas */
+        object-fit: contain; /* Asegura que las imágenes no se deformen */
+        border-radius: 8px;
+    }
+
+    .producto-relacionado p {
+        font-size: 14px;
+        margin: 10px 0;
+        color: #333;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 160px; /* Ajuste el tamaño máximo para pantallas pequeñas */
+    }
+
+    .producto-relacionado .precio {
+        color: #e60000;
+        font-weight: bold;
+        font-size: 16px;
+    }
 }

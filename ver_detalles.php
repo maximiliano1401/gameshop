@@ -89,7 +89,7 @@ include "procesos/ver_detalle_producto.php";
             <div class="info-producto">
                 <h2> <?php echo $Nombre ?> </h2>
                 <p class="plataforma"> <?php echo $Categoria ?> </p>
-                <p class="precio"> <?php echo $Precio ?> </p>
+                <p class="precio"> $<?php echo $Precio ?> </p>
 
                 <!-- <button class="boton-comprar">Comprar</button> -->
                 <!-- <button class="boton-carrito">Agregar al carrito</button> -->

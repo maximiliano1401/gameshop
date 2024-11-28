@@ -1,6 +1,12 @@
 <?php
 session_start();
+
+if (isset($_SESSION['Correo']) && $_SESSION['Correo'] == 'max1@outlook.com') {
+    header("Location: panal_admin.php");
+    exit;
+}
 ?>
+
 
 <!DOCTYPE html>
 <html lang="es">
