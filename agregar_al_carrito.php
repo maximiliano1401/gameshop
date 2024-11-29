@@ -1,10 +1,10 @@
 <?php
 session_start();
-include "../conexion.php";
+include_once "conexion.php";
+header('Content-Type: application/json');
 
-// Verificar si el usuario ha iniciado sesión
 if (!isset($_SESSION["UsuarioID"])) {
-    header("Location: ../login.php");
+    header("Location: login.php");
     exit();
 }
 
@@ -23,40 +23,22 @@ if (isset($_POST['ProductoID'])) {
         $fila = mysqli_fetch_assoc($resultado);
 
         if ($fila["Cantidad"] > 0) {
-        
-            echo "<script> alert('Producto ya en carrito.'); </script>";
-            echo "<script> window.history.back(); </script>";
-            // header("Location: ../ver_detalles.php?id=" . $ProductoID);
-
+            echo json_encode(["status" => "error", "message" => "Producto ya en el carrito"]);
             exit();
         }
-
-        } else {
+    } else {
         // Si el producto no está en el carrito, agregarlo
         $Cantidad = 1;
         $sql = "INSERT INTO carritodecompras (UsuarioID, ProductoID, Cantidad) 
         VALUES ('$UsuarioID', '$ProductoID', '$Cantidad')";
 
         if (mysqli_query($conexion, $sql)) {
-            echo "<script>
-                alert('Producto Añadido.');
-                </script>";
-
-            echo "<script> window.history.back(); </script>";
-
+            echo json_encode(["status" => "success", "message" => "Producto añadido."]);
         } else {
             echo "Error al guardar los datos: " . mysqli_error($conexion);
         }
     }
-
-    // Redirigir de vuelta a la página del producto
-    // header("Location: ../ver_detalles.php?id=" . $ProductoID);
-    exit();
-} else {
-    // Redirigir si no hay un ID del producto
-    header("Location: ../index.php");
     exit();
 }
 
 mysqli_close($conexion);
-?>
