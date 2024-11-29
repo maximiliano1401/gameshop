@@ -1,6 +1,5 @@
 <?php
-session_start();
-include_once('../conexion.php');
+include_once('conexion.php');
 
 // Verificar si el usuario está logueado
 if (!isset($_SESSION['UsuarioID'])) {
@@ -32,20 +31,22 @@ if (mysqli_num_rows($resultado_pedidos) > 0) {
 
     // Mostrar los pedidos del usuario
     while ($pedido = mysqli_fetch_assoc($resultado_pedidos)) {
-        echo "<div class='pedido-item'>
+        echo "<div class='cart-item'>
+            <div class='item-details'>
             <h2>Pedido #" . $pedido['PedidoID'] . "</h2>
             <p>Estado: " . $pedido['Estado'] . "</p>
             <p>Total: $" . $pedido['Total'] . "</p>
             <p>Dirección de envío: " . $pedido['DireccionEnvio'] . "</p>
-            <p>Fecha: " . $pedido['FechaPedido'] . "</p>";
+            <p>Fecha: " . $pedido['FechaPedido'] . "</p>
+            </div>";
 
         // Consulta SQL para obtener los productos del pedido
         $sql_detalles = "SELECT 
                 dp.ProductoID,
                 p.Nombre AS Producto,
                 dp.Cantidad,
-                p.Precio AS PrecioUnitario,
-                (dp.Cantidad * p.Precio) AS Subtotal
+                p.Precio AS Precio,
+                p.ImagenURL
             FROM 
                 detallesdepedido dp
             JOIN 
@@ -58,16 +59,17 @@ if (mysqli_num_rows($resultado_pedidos) > 0) {
 
         // Comprobar si se han encontrado productos en el pedido
         if (mysqli_num_rows($resultado_detalles) > 0) {
-            echo "<ul class='productos-del-pedido'>";
+            echo "<div class='productos-del-pedido'>";
             while ($detalle = mysqli_fetch_assoc($resultado_detalles)) {
-                echo "<li>
-                    <h3>" . $detalle['Producto'] . "</h3>
-                    <p>Cantidad: " . $detalle['Cantidad'] . "</p>
-                    <p>Precio Unitario: $" . $detalle['PrecioUnitario'] . "</p>
-                    <p>Subtotal: $" . $detalle['Subtotal'] . "</p>
-                </li>";
+                echo "<div class='cart-item'>
+                        <img src='" . $detalle['ImagenURL'] . "' alt='" . $detalle['Producto'] . "'>
+                        <div class='item-details'>
+                            <h3>" . $detalle['Producto'] . "</h3>
+                            <p>Precio: $" . $detalle['Precio'] . "</p>
+                        </div>
+                    </div>";
             }
-            echo "</ul>";
+            echo "</div>";
         } else {
             echo "<p>No hay productos en este pedido.</p>";
         }

@@ -54,7 +54,8 @@ $resultado = mysqli_query($conexion, $sql);
 if (mysqli_num_rows($resultado) > 0) {
     // Mostrar los pedidos
     while ($fila = mysqli_fetch_assoc($resultado)) {
-        echo "<div class='pedido-item'>
+        echo "<div class='order-card'>
+            <div class='order-details'>
             <h3>Pedido ID: " . $fila['PedidoID'] . "</h3>
             <p><strong>Fecha de Pedido:</strong> " . $fila['FechaPedido'] . "</p>
             <p><strong>Usuario:</strong> " . $fila['NombreUsuario'] . "</p>
@@ -70,12 +71,13 @@ if (mysqli_num_rows($resultado) > 0) {
         foreach ($productos as $producto) {
             echo "<li>" . $producto . "</li>"; // Mostrar cada producto
         }
-        echo "</ul>";
+        echo "</ul> </div>";
 
         // Formulario para cambiar el estado del pedido
+        echo "<div class='order-actions'>";
         echo "<form action='' method='POST'>
                 <input type='hidden' name='PedidoID' value='" . $fila['PedidoID'] . "'>
-                <select name='nuevo_estado'>
+                <select name='nuevo_estado' class='btn-processing'>
                     <option value='Entregado' " . ($fila['EstadoPedido'] == 'Entregado' ? 'selected' : '') . ">Entregado</option>
                     <option value='Enviado' " . ($fila['EstadoPedido'] == 'Enviado' ? 'selected' : '') . ">Enviado</option>
                     <option value='Pendiente' " . ($fila['EstadoPedido'] == 'Pendiente' ? 'selected' : '') . ">Pendiente</option>
@@ -84,6 +86,7 @@ if (mysqli_num_rows($resultado) > 0) {
                 <button class='btn-add' type='submit'>Actualizar Estado</button>
             </form>";
 
+        echo "</div>";
         echo "</div>";
         echo "<hr>";
     }

@@ -82,8 +82,8 @@ main {
 }
 
 .btn-processing {
-    background-color: #ff6666;
-    color: white;
+    background-color: #ddd;
+    color: black;
     border: none;
     padding: 8px 12px;
     border-radius: 5px;
@@ -92,7 +92,7 @@ main {
 }
 
 .btn-processing:hover {
-    background-color: #ff4d4d;
+    background-color: #d7d7d7;
 }
 
 .btn-completed {
