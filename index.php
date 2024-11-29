@@ -2,7 +2,7 @@
 session_start();
 
 if (isset($_SESSION['Correo']) && $_SESSION['Correo'] == 'max1@outlook.com') {
-    header("Location: panal_admin.php");
+    header("Location: panel_admin.php");
     exit;
 }
 ?>
