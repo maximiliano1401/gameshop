@@ -28,6 +28,11 @@ header('Content-Type: application/json');
                 $_SESSION['CodigoPostal'] = $fila['CodigoPostal'];
                 $_SESSION['Telefono'] = $fila['Telefono'];
 
+                $nombreCompleto = $fila['Nombre'];
+                $nombreArray = explode(' ', $nombreCompleto);
+                $primerNombre = $nombreArray[0];
+                $_SESSION['PrimerNombre'] = $primerNombre;
+
                 echo json_encode(["status" => "success", "message" => "Inicio de sesión exitoso"]);
                 exit();
             } else {

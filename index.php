@@ -29,7 +29,7 @@ if (isset($_SESSION['Correo']) && $_SESSION['Correo'] == 'max1@outlook.com') {
             echo "<a href='registro.php'>Crear cuenta</a>";
             echo "<a href='login.php'>Ingresar</a>";
         } else {
-            echo "<a href='perfil.php'>" . $_SESSION["Nombre"] . "</a>";
+            echo "<a href='perfil.php'>" . $_SESSION["PrimerNombre"] . "</a>";
             echo "<a href='procesos/cerrar_sesion.php'>Cerrar Sesión</a>";
         }
         ?>
@@ -56,7 +56,7 @@ if (isset($_SESSION['Correo']) && $_SESSION['Correo'] == 'max1@outlook.com') {
             echo "
             <a href='perfil.php' class='nav-item'>
                 <i class='fas fa-user'></i>
-                <span>" . $_SESSION["Nombre"] . "</span>
+                <span>" . $_SESSION["PrimerNombre"] . "</span>
             </a>
             <a href='procesos/cerrar_sesion.php' class='nav-item'>
                 <i class='fas fa-sign-out-alt'></i>
