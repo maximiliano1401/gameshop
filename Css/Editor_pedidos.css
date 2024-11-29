@@ -1,0 +1,132 @@
+/* General */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    background-color: #ffa500;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.logo .game {
+    color: white;
+}
+
+.logo .shop {
+    color: red;
+}
+
+main {
+    display: flex;
+    margin: 20px;
+}
+
+.orders {
+    flex: 3;
+    margin-right: 20px;
+}
+
+.sidebar {
+    flex: 1;
+    text-align: center;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+}
+
+.sidebar p {
+    font-size: 14px;
+}
+
+.order-card {
+    display: flex;
+    align-items: flex-start;
+    border-bottom: 1px solid #ddd;
+    padding: 15px 0;
+}
+
+.product-img {
+    width: 80px;
+    height: 80px;
+    margin-right: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.order-details {
+    flex: 1;
+}
+
+.order-details p {
+    margin: 5px 0;
+}
+
+.order-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.btn-processing {
+    background-color: #ff6666;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    cursor: pointer;
+}
+
+.btn-processing:hover {
+    background-color: #ff4d4d;
+}
+
+.btn-completed {
+    background-color: #ffd966;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-completed:hover {
+    background-color: #ffcc33;
+}
+
+.btn-add {
+    background-color: #32cd32;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px 0;
+}
+
+.btn-add:hover {
+    background-color: #2eb82e;
+}
+
+.pipe {
+    width: 50px;
+    height: 100px;
+    background-color: #32cd32;
+    margin: 0 auto;
+    border: 5px solid #228b22;
+    border-radius: 5px;
+}
