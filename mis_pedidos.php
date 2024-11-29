@@ -37,7 +37,7 @@ if (!isset($_SESSION["UsuarioID"])) {
                 ?>
                 <a href="">Categorías</a>
                 <a href="carrito_compras.php">Carrito</a>
-                <a href="">Historial</a>
+                <a href="mis_pedidos.php">Historial</a>
             </nav>
         </div>
     </header>

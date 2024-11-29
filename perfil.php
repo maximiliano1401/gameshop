@@ -54,7 +54,8 @@ if (!isset($_SESSION["UsuarioID"])) {
             text-align: right;
         }
 
-        .modal-footer button {
+        .modal-footer .save-btn, 
+        .modal-footer .close-btn {
             padding: 10px 20px;
             border: none;
             border-radius: 5px;
@@ -152,6 +153,8 @@ if (!isset($_SESSION["UsuarioID"])) {
             <span>Categorías</span>
         </a>
     </nav>
+
+    <!-- BODY -->
     <div class="profile-info">
         <button class="button" onclick="openModal('modal-info')">
             <span class="title">Tu información</span>
@@ -172,7 +175,14 @@ if (!isset($_SESSION["UsuarioID"])) {
             <span class="title">Dirección</span>
             <span class="description">Direcciones</span>
         </button>
-    </div>
+
+        <button class="button" onclick="location.href='mis_pedidos.php'">
+            <span class="title">Mis Pedidos</span>
+            <span class="description">Ver Historial de Pedidos</span>
+        </button>
+
+        <button type="button" onclick="location.href='procesos/cerrar_sesion.php'">Cerrar Sesion</button>
+
     </div>
 
     <!-- Modales -->
@@ -216,22 +226,22 @@ if (!isset($_SESSION["UsuarioID"])) {
     <div class="modal" id="modal-tarjetas">
         <div class="modal-header">Editar Información de Tarjetas</div>
         <div class="modal-content">
-        <form id="actualizar_tarjeta">
-            <input type="hidden" value="<?php echo $UsuarioID ?>" name="UsuarioID" />
-            <input type="text" placeholder="Número de tarjeta" value="<?php echo $NumeroTarjeta ?>" name="NumeroTarjeta" />
-            <input type="text" placeholder="Nombre del Titular" value="<?php echo $NombreTitular ?>" name="NombreTitular" />
-            <input type="date" placeholder="Fecha de vencimiento" value="<?php echo $FechaExpiracion ?>" name="FechaExpiracion" />
-            <input type="password" placeholder="CVV" value="<?php  ?>" name="CVV" />
-            <select name="TipoTarjeta" id="TipoTarjeta">
-                <option value="" disabled <?php echo ($TipoTarjeta == "") ? 'selected' : ''; ?>>Seleccione un tipo de tarjeta</option>
-                <option value="Credito" <?php echo ($TipoTarjeta == "Credito") ? 'selected' : ''; ?>>Crédito</option>
-                <option value="Debito" <?php echo ($TipoTarjeta == "Debito") ? 'selected' : ''; ?>>Débito</option>
-            </select>
-        </form>
+            <form id="actualizar_tarjeta">
+                <input type="hidden" value="<?php echo $UsuarioID ?>" name="UsuarioID" />
+                <input type="text" placeholder="Número de tarjeta" value="<?php echo $NumeroTarjeta ?>" name="NumeroTarjeta" />
+                <input type="text" placeholder="Nombre del Titular" value="<?php echo $NombreTitular ?>" name="NombreTitular" />
+                <input type="date" placeholder="Fecha de vencimiento" value="<?php echo $FechaExpiracion ?>" name="FechaExpiracion" />
+                <input type="password" placeholder="CVV" value="<?php  ?>" name="CVV" />
+                <select name="TipoTarjeta" id="TipoTarjeta">
+                    <option value="" disabled <?php echo ($TipoTarjeta == "") ? 'selected' : ''; ?>>Seleccione un tipo de tarjeta</option>
+                    <option value="Credito" <?php echo ($TipoTarjeta == "Credito") ? 'selected' : ''; ?>>Crédito</option>
+                    <option value="Debito" <?php echo ($TipoTarjeta == "Debito") ? 'selected' : ''; ?>>Débito</option>
+                </select>
+            </form>
         </div>
         <div class="modal-footer">
             <button class="close-btn" onclick="closeModal()">Cancelar</button>
-            <button class="save-btn" onclick ="actualizarTarjeta()">Guardar </button>
+            <button class="save-btn" onclick="actualizarTarjeta()">Guardar </button>
         </div>
     </div>
 
@@ -239,16 +249,16 @@ if (!isset($_SESSION["UsuarioID"])) {
     <div class="modal" id="modal-direcciones">
         <div class="modal-header">Editar Dirección</div>
         <div class="modal-content">
-        <form id="actualizar_direccion">
-            <input type="hidden" value="<?php echo $UsuarioID ?>" name="UsuarioID" />
-            <input type="text" placeholder="Calle y número" value="<?php echo $Direccion ?>" name="Direccion" />
-            <input type="text" placeholder="Ciudad" value="<?php echo $Ciudad ?>" name="Ciudad" />
-            <input type="text" placeholder="Código postal" value="<?php echo $CodigoPostal ?>" name="CodigoPostal" />
-        </form>
+            <form id="actualizar_direccion">
+                <input type="hidden" value="<?php echo $UsuarioID ?>" name="UsuarioID" />
+                <input type="text" placeholder="Calle y número" value="<?php echo $Direccion ?>" name="Direccion" />
+                <input type="text" placeholder="Ciudad" value="<?php echo $Ciudad ?>" name="Ciudad" />
+                <input type="text" placeholder="Código postal" value="<?php echo $CodigoPostal ?>" name="CodigoPostal" />
+            </form>
         </div>
         <div class="modal-footer">
             <button class="close-btn" onclick="closeModal()">Cancelar</button>
-            <button class="save-btn" onclick ="actualizarDireccion()">Guardar </button>
+            <button class="save-btn" onclick="actualizarDireccion()">Guardar </button>
         </div>
     </div>
     <!-- FIN DE LOS MODALES DE LOS FORMULARIOS -->
@@ -275,101 +285,103 @@ if (!isset($_SESSION["UsuarioID"])) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
-        function actualizarContrasena(){
+        function actualizarContrasena() {
             var datos = new FormData(document.getElementById("actualizar_contrasena"));
-        fetch('actualizar_contrasena.php', {
-            method: 'POST',
-            body: datos
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.status === 'success') {
-                mostrarModal(data.message, 'success'); 
-            } else {
-                mostrarModal(data.message, 'error'); 
-            }
-        })
-        .catch(error => {
-            mostrarModal("Ocurrió un error al intentar registrar al usuario. Intente de nuevo.", 'error');  
-        });
+            fetch('actualizar_contrasena.php', {
+                    method: 'POST',
+                    body: datos
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        mostrarModal(data.message, 'success');
+                    } else {
+                        mostrarModal(data.message, 'error');
+                    }
+                })
+                .catch(error => {
+                    mostrarModal("Ocurrió un error al intentar registrar al usuario. Intente de nuevo.", 'error');
+                });
 
         }
-    function actualizarPerfil() {
-        var datos = new FormData(document.getElementById("actualizar_perfil"));
-        fetch('actualizar_usuario.php', {
-            method: 'POST',
-            body: datos
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.status === 'success') {
-                mostrarModal(data.message, 'success'); 
-            } else {
-                mostrarModal(data.message, 'error'); 
-            }
-        })
-        .catch(error => {
-            mostrarModal("Ocurrió un error al intentar registrar al usuario. Intente de nuevo.", 'error');  
-        });
-    }
 
-    function actualizarTarjeta() {
-        var datos = new FormData(document.getElementById("actualizar_tarjeta"));
-        fetch('actualizar_tarjeta.php', {
-            method: 'POST',
-            body: datos
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.status === 'success') {
-                mostrarModal(data.message, 'success');
-            } else {
-                mostrarModal(data.message, 'error');
-            }
-        })
-        .catch(error => {
-            mostrarModal("Ocurrió un error al intentar registrar la tarjeta. Intente de nuevo.", 'error');
-        });
-    }
+        function actualizarPerfil() {
+            var datos = new FormData(document.getElementById("actualizar_perfil"));
+            fetch('actualizar_usuario.php', {
+                    method: 'POST',
+                    body: datos
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        mostrarModal(data.message, 'success');
+                    } else {
+                        mostrarModal(data.message, 'error');
+                    }
+                })
+                .catch(error => {
+                    mostrarModal("Ocurrió un error al intentar registrar al usuario. Intente de nuevo.", 'error');
+                });
+        }
 
-    function actualizarDireccion() {
-        var datos = new FormData(document.getElementById("actualizar_direccion"));
-        fetch('actualizar_direccion.php', { 
-            method: 'POST',
-            body: datos
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.status === 'success') {
-                mostrarModal(data.message, 'success');
-            } else {
-                mostrarModal(data.message, 'error');
-            }
-        })
-        .catch(error => {
-            mostrarModal("Ocurrió un error al intentar registrar la dirección. Intente de nuevo.", 'error');
-        });
-    }
+        function actualizarTarjeta() {
+            var datos = new FormData(document.getElementById("actualizar_tarjeta"));
+            fetch('actualizar_tarjeta.php', {
+                    method: 'POST',
+                    body: datos
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        mostrarModal(data.message, 'success');
+                    } else {
+                        mostrarModal(data.message, 'error');
+                    }
+                })
+                .catch(error => {
+                    mostrarModal("Ocurrió un error al intentar registrar la tarjeta. Intente de nuevo.", 'error');
+                });
+        }
 
-    // Mostrar el mensaje del modal y aplicar el estilo según el status
-    function mostrarModal(mensaje, tipo) {
-        const modalMessage = document.getElementById("modal-message");
-        modalMessage.textContent = mensaje;
-        // Mostrar el modal usando Bootstrap
-        $('#responseModal').modal('show');
-    }
+        function actualizarDireccion() {
+            var datos = new FormData(document.getElementById("actualizar_direccion"));
+            fetch('actualizar_direccion.php', {
+                    method: 'POST',
+                    body: datos
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        mostrarModal(data.message, 'success');
+                    } else {
+                        mostrarModal(data.message, 'error');
+                    }
+                })
+                .catch(error => {
+                    mostrarModal("Ocurrió un error al intentar registrar la dirección. Intente de nuevo.", 'error');
+                });
+        }
 
-    function openModal(modalId) {
-        document.getElementById(modalId).classList.add('modal-active');
-        document.getElementById('modal-overlay').classList.add('modal-active');
-    }
+        // Mostrar el mensaje del modal y aplicar el estilo según el status
+        function mostrarModal(mensaje, tipo) {
+            const modalMessage = document.getElementById("modal-message");
+            modalMessage.textContent = mensaje;
+            // Mostrar el modal usando Bootstrap
+            $('#responseModal').modal('show');
+        }
 
-    function closeModal() {
-        const modals = document.querySelectorAll('.modal');
-        modals.forEach(modal => modal.classList.remove('modal-active'));
-        document.getElementById('modal-overlay').classList.remove('modal-active');
-    }
-</script>
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.add('modal-active');
+            document.getElementById('modal-overlay').classList.add('modal-active');
+        }
+
+        function closeModal() {
+            const modals = document.querySelectorAll('.modal');
+            modals.forEach(modal => modal.classList.remove('modal-active'));
+            document.getElementById('modal-overlay').classList.remove('modal-active');
+        }
+    </script>
 
 </body>
+
 </html>
