@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 26-11-2024 a las 00:43:57
+-- Tiempo de generación: 03-12-2024 a las 00:38:33
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -45,7 +45,27 @@ INSERT INTO `carritodecompras` (`CarritoID`, `UsuarioID`, `ProductoID`, `Cantida
 (4, 7, 2, 1),
 (6, 7, 20, 1),
 (7, 7, 4, 1),
-(8, 7, 7, 1);
+(8, 7, 7, 1),
+(17, 12, 11, 1),
+(18, 12, 12, 1),
+(19, 12, 1, 1),
+(20, 12, 13, 1),
+(21, 12, 60, 1),
+(22, 12, 62, 1),
+(23, 12, 5, 1),
+(24, 12, 57, 1),
+(25, 12, 25, 1),
+(26, 12, 4, 1),
+(27, 12, 7, 1),
+(28, 12, 10, 1),
+(29, 12, 9, 1),
+(30, 12, 6, 1),
+(31, 12, 19, 1),
+(32, 12, 20, 1),
+(33, 12, 3, 1),
+(34, 12, 8, 1),
+(35, 12, 56, 1),
+(36, 12, 46, 1);
 
 -- --------------------------------------------------------
 
@@ -61,20 +81,19 @@ CREATE TABLE `detallesdepedido` (
   `PrecioUnitario` decimal(10,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- --------------------------------------------------------
-
 --
--- Estructura de tabla para la tabla `historialdecompras`
+-- Volcado de datos para la tabla `detallesdepedido`
 --
 
-CREATE TABLE `historialdecompras` (
-  `HistorialID` int(11) NOT NULL,
-  `UsuarioID` int(11) DEFAULT NULL,
-  `PedidoID` int(11) DEFAULT NULL,
-  `FechaCompra` datetime NOT NULL,
-  `MontoTotal` decimal(10,2) NOT NULL,
-  `Estado` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+INSERT INTO `detallesdepedido` (`DetalleID`, `PedidoID`, `ProductoID`, `Cantidad`, `PrecioUnitario`) VALUES
+(1, 1, 1, 1, 1859.76),
+(2, 1, 20, 1, 1151.00),
+(3, 3, 4, 1, 798.00),
+(4, 4, 3, 1, 1797.00),
+(5, 4, 5, 1, 799.00),
+(6, 4, 1, 1, 1859.76),
+(7, 5, 1, 1, 1859.76),
+(8, 5, 2, 1, 594.00);
 
 -- --------------------------------------------------------
 
@@ -90,6 +109,16 @@ CREATE TABLE `pedidos` (
   `Total` decimal(10,2) DEFAULT NULL,
   `DireccionEnvio` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `pedidos`
+--
+
+INSERT INTO `pedidos` (`PedidoID`, `UsuarioID`, `FechaPedido`, `Estado`, `Total`, `DireccionEnvio`) VALUES
+(1, 10, '2024-11-27 01:55:55', 'Pendiente', 3010.76, '12345 - Host - Local'),
+(3, 12, '2024-11-28 23:28:26', 'Entregado', 798.00, ' -  - '),
+(4, 12, '2024-11-28 23:30:29', 'Pendiente', 4455.76, ' -  - '),
+(5, 10, '2024-12-02 17:33:47', 'Pendiente', 2453.76, '12345 - Host - Local');
 
 -- --------------------------------------------------------
 
@@ -112,11 +141,11 @@ CREATE TABLE `productos` (
 --
 
 INSERT INTO `productos` (`ProductoID`, `Nombre`, `Descripcion`, `Precio`, `Stock`, `ImagenURL`, `Categoria`) VALUES
-(1, 'Easysmx X15 Pc Controller - Enhanced Wireless Bluetooth', 'Producto IMPORTADO***\r\n\r\nContenido:\r\nEasySMX X15 PC Controller - Enhanced Wireless Bluetooth Controller with Hall Joysticks/Hall Triggers/RGB Lighting - No Stick Drift, No Dead Zone - Work for Windows', 1859.76, 10, 'img_bd/ControlEasysmx.webp', 'CONTROLES'),
+(1, 'Easysmx X15 Pc Controller - Enhanced Wireless Bluetooth', 'Producto IMPORTADO\r\nContenido:\r\nEasySMX X15 PC Controller - Enhanced Wireless Bluetooth Controller with Hall Joysticks/Hall Triggers/RGB Lighting - No Stick Drift, No Dead Zone - Work for Windows', 1859.76, 10, 'img_bd/ControlEasysmx.webp', 'CONTROLES'),
 (2, 'Easysmx 9110 Control Inalámbrico Joystick Para Pc Windows', 'Descripción\n\n1. Gran compatibilidad: el controlador de juego inalámbrico funciona con PC,Nintendo Switch y PS3, Android, Vista, Steam, Steam Deck. Atención: para los dispositivos Android, debe Andro', 594.00, 10, 'img_bd/ControlEasysmx9110.webp', 'CONTROLES'),
 (3, 'Control Inalámbrico Xbox Series S/x/one Ghost Cipher Blanco', 'Descubre misterios con el Control inalámbrico Xbox: Edición especial Ghost Cipher, con un diseño transparente, un interior plateado, detalles metálicos y mucho más. Mira a través de la carcasa superio', 1797.00, 10, 'img_bd/ControlXboxGhost.webp', 'CONTROLES'),
 (4, 'Control Para Xbox One Alambrico Serie Xs Solo Por Usb.', 'Acerca de este artículo\nCon licencia oficial para Xbox\nDos motores de vibración\nConector de auriculares estéreo de 3,5 mm\nCable USB extraíble de 3 metros (10 pies)\n\nPowerA es una marca líder rec', 798.00, 10, 'img_bd/ControlXbox.jpg', 'CONTROLES'),
-(5, 'Control joystick ACCO Brands PowerA Enhanced Wired Controller for Xbox One black', 'PowerA es una marca líder reconocida por la venta de accesorios para videojuegos, productos accesibles y bien diseñados. Caracterizada por una fuerte pasión hacia los juegos, tiene la misión de brinda', 799.00, 10, 'img_bd/ControlAccoBlack.webp', 'CONTROLES'),
+(5, 'Control ACCO Brands PowerA Enhanced Wired Controller for Xbox One black', 'PowerA es una marca líder reconocida por la venta de accesorios para videojuegos, productos accesibles y bien diseñados. Caracterizada por una fuerte pasión hacia los juegos, tiene la misión de brinda', 799.00, 10, 'img_bd/ControlAccoBlack.webp', 'CONTROLES'),
 (6, 'Call of Duty: Black Ops 6 - PS5 - PlayStation 5 - Cross Gen Bundle Edition Edition', 'Desarrollado por Treyarch y Raven, Call of Duty: Black Ops 6 es un thriller de acción y espionaje ambientado a principios de la década de los 90, un período de transición e inestabilidad política, mar', 1439.00, 10, 'img_bd/VideojuegoCOD.jpg', 'VIDEOJUEGOS'),
 (7, 'Super Mario Party™ Jamboree con 3 meses de Nintendo Switch Online.', 'Únete a la más reciente entrega de Mario Party, toda una fiesta de siete tableros y más de 110 minijuegos Desde una carrera en un carrusel hasta jugar minigolf con los controles por movimiento, esta f', 1.00, 10, 'img_bd/VideojuegoJamboree.jpg', 'VIDEOJUEGOS'),
 (8, 'Silent Hill 2 para PlayStation 5 (PS5)', 'Adopta el papel de James Sunderland y adéntrate en el pueblo casi desértico de Silent Hill en este esperado remake del clásico de 2001. Atraído a este misterioso lugar por una carta de su esposa, fall', 1214.00, 10, 'img_bd/VideojuegoSilentHill2.jpg', 'VIDEOJUEGOS'),
@@ -163,27 +192,13 @@ INSERT INTO `productos` (`ProductoID`, `Nombre`, `Descripcion`, `Precio`, `Stock
 (53, 'VOICEPTT Estuche Kit de Accesorios Nintendo Switch OLED 21 en 1, Funda de Viaje, 2 Protector de Pant', 'VOICEPTT Estuche Kit de Accesorios Nintendo Switch OLED 21 en 1, Funda de Viaje, 2 Protector de Pantalla Vidrio, Carcasa Transparente, Joy-con Pulgar Grips, 8 Tapas para Joystick, Cable USB, Caja de t', 299.00, 5, 'img_bd/AccesorioEstucheSwitch.jpg', 'ACCESORIOS'),
 (54, '25 en 1 Kit de Funda para Nintendo Switch OLED, Accesorios para Nintendo Switch OLED, 6 fundas para ', '25 en 1 Kit de Funda para Nintendo Switch OLED, Accesorios para Nintendo Switch OLED, 6 fundas para agarre de pulgar, 6 fundas para Joy-Con, 1 caja para tarjeta de juego, un soporte, un cable de datos', 269.00, 4, 'img_bd/AccesorioFundaSwitch.jpg', 'ACCESORIOS'),
 (55, 'Funda para Nintendo Switch OLED Portátil, Estuche de Transporte para Nintendo Switch, Protector Case', 'Funda para Nintendo Switch OLED Portátil, Estuche de Transporte para Nintendo Switch, Protector Case Nintendo Switch Accesorios Impermeable, Compartimentos para Cartuchos, Cables, Joy-Con Rojo', 299.00, 4, 'img_bd/AccesorioFundaRojaSwitch.jpg', 'ACCESORIOS'),
-(56, 'MOYAC Protector Transparente para Nintendo (Versión OLED), Ligero, Cómodo de Sostener, Resistente al', 'MOYAC Protector Transparente para Nintendo (Versión OLED), Ligero, Cómodo de Sostener, Resistente al Desgaste, Amortiguador, Resistente a los Arañazos', 239.00, 5, 'img_bd/AccesorioProtectorSwitch.jpg', 'ACCESORIOS'),
+(56, 'MOYAC Protector Transparente para Nintendo (Versión OLED)', 'MOYAC Protector Transparente para Nintendo (Versión OLED), Ligero, Cómodo de Sostener, Resistente al Desgaste, Amortiguador, Resistente a los Arañazos', 239.00, 5, 'img_bd/AccesorioProtectorSwitch.jpg', 'ACCESORIOS'),
 (57, 'Control inalámbrico DualSense - Fortnite Edición Limitada', 'Control inalámbrico DualSense - Fortnite Edición Limitada', 1999.00, 4, 'img_bd/ControlPSFortnite.jpg', 'CONTROLES'),
 (58, 'Control inalámbrico DualSense® – Chroma Indigo', 'Control inalámbrico DualSense® – Chroma Indigo', 4.00, 1799, 'img_bd/ControlPS5Indigo.jpg', 'CONTROLES'),
 (59, 'Control inalámbrico DualSense® – Chroma Pearl', 'Control inalámbrico DualSense® – Chroma Pearl', 1799.00, 4, 'img_bd/ControlPS5Pearl.jpg', 'CONTROLES'),
 (60, 'Nintendo Switch Pro Controller - The Legend of Zelda: Tears of the Kingdom Edition (Importado de Nin', 'Nintendo Switch Pro Controller - The Legend of Zelda: Tears of the Kingdom Edition (Importado de Nintendo Japón)', 1344.00, 4, 'img_bd/ControlSwitchZelda.jpg', 'CONTROLES'),
 (61, 'Control Switch Inalambrico Compatible con Switch/OLED/Lite, FUNLAB Pro Controller Switch Inalámbrico', 'Control Switch Inalambrico Compatible con Switch/OLED/Lite, FUNLAB Pro Controller Switch Inalámbrico, Firefly Mando Switch Bluetooth con 7 LED Colores/Botones Traseros/NFC/Control de Movimiento- Negro', 899.00, 4, 'img_bd/ControlSwitchFUNLAB.jpg', 'CONTROLES'),
 (62, 'Control Switch Inalambrico Compatible con Switch/OLED/Lite, FUNLAB Pro Controller Switch Inalámbrico', 'Control Switch Inalambrico Compatible con Switch/OLED/Lite, FUNLAB Pro Controller Switch Inalámbrico, Firefly Mando Switch Bluetooth con 7 LED Colores/Botones Traseros/Turbo/Control de Movimiento - Ma', 799.00, 4, 'img_bd/ControlSwitchFirefly.jpg', 'CONTROLES');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `superusuarios`
---
-
-CREATE TABLE `superusuarios` (
-  `SuperUsuarioID` int(11) NOT NULL,
-  `Nombre` varchar(100) DEFAULT NULL,
-  `Correo` varchar(100) DEFAULT NULL,
-  `Contrasena` varchar(100) DEFAULT NULL,
-  `Telefono` varchar(20) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -207,7 +222,9 @@ CREATE TABLE `tarjetas` (
 --
 
 INSERT INTO `tarjetas` (`TarjetaID`, `UsuarioID`, `NumeroTarjeta`, `NombreTitular`, `FechaExpiracion`, `CVV`, `TipoTarjeta`, `FechaRegistro`) VALUES
-(1, 7, '405012345678', 'Maximiliano Perez', '2025-11-25', '000', 'Debito', '2024-11-22 02:08:02');
+(1, 7, '405012345678', 'Maximiliano Perez', '2025-11-25', '000', 'Debito', '2024-11-22 02:08:02'),
+(3, 10, '12345678987654', 'Maximo', '2023-12-31', '111', 'Credito', '2024-11-26 16:43:28'),
+(4, 12, '5204165312230091', 'Pedrito Loza', '2030-01-12', '000', 'Debito', '2024-11-29 16:38:52');
 
 -- --------------------------------------------------------
 
@@ -232,11 +249,10 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`UsuarioID`, `Nombre`, `Edad`, `Correo`, `Contrasena`, `Direccion`, `Ciudad`, `CodigoPostal`, `Telefono`) VALUES
-(1, 'Maximiliano', 27, 'max@dominio.com', '12345678', 'San Francisco', NULL, NULL, '9817517178'),
 (5, 'Mario Segovia', 27, 'mario@dominio.com', '$2y$10$ZvZKif3bm84g/N/OyTyUmu7bTf2xIlGOmuPTdjha06m7wZJ.mZlum', 'Campeche', NULL, NULL, '987654321'),
 (7, 'Maximiliano', 30, 'maxi@dominio.com', '$2y$10$B5gjVIEIZ0jWnCBL/UlNeOQ0z47DVmc51qzZycruvcZVNDsJkczXq', 'San Francisco', 'Campeche', 24010, '987654321'),
-(8, 'Max', 27, 'max1@dominio.com', '$2y$10$nfRr2mcGaPqcUPQnSNe.Z.GPuzoLGnJboF5z4QJiAo/I8.ljzPAC.', NULL, NULL, NULL, '1234567890'),
-(9, 'Prueba', 30, 'prueba@gmail.com', '$2y$10$YdcXcw5E/lmntQPtzpjy0.NeJgUrKDgP0T7xC5CCaSf.zP/uwJela', NULL, NULL, NULL, '1234567890');
+(10, 'Bryant Maximiliano Dzul Pérez', 30, 'max1@outlook.com', '$2y$10$F8UR/3aY8B6uk3sunNFil.DLM.HMHQj/AVc1CY29V7p6QHBaHC0bG', 'Local', 'Host', 12345, '9876543212'),
+(12, 'Pochita', 20, 'pochita@outlook.com', '$2y$10$OqRm3JDaXBCJ45MFI7j.m.xYjCXww587s/2HCKjTgHUKMo2pErR3C', 'La Peña', 'Camp', 220022, '9876543212');
 
 --
 -- Índices para tablas volcadas
@@ -259,14 +275,6 @@ ALTER TABLE `detallesdepedido`
   ADD KEY `ProductoID` (`ProductoID`);
 
 --
--- Indices de la tabla `historialdecompras`
---
-ALTER TABLE `historialdecompras`
-  ADD PRIMARY KEY (`HistorialID`),
-  ADD KEY `UsuarioID` (`UsuarioID`),
-  ADD KEY `PedidoID` (`PedidoID`);
-
---
 -- Indices de la tabla `pedidos`
 --
 ALTER TABLE `pedidos`
@@ -278,13 +286,6 @@ ALTER TABLE `pedidos`
 --
 ALTER TABLE `productos`
   ADD PRIMARY KEY (`ProductoID`);
-
---
--- Indices de la tabla `superusuarios`
---
-ALTER TABLE `superusuarios`
-  ADD PRIMARY KEY (`SuperUsuarioID`),
-  ADD UNIQUE KEY `Correo` (`Correo`);
 
 --
 -- Indices de la tabla `tarjetas`
@@ -308,49 +309,37 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `carritodecompras`
 --
 ALTER TABLE `carritodecompras`
-  MODIFY `CarritoID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `CarritoID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT de la tabla `detallesdepedido`
 --
 ALTER TABLE `detallesdepedido`
-  MODIFY `DetalleID` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `historialdecompras`
---
-ALTER TABLE `historialdecompras`
-  MODIFY `HistorialID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `DetalleID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `pedidos`
 --
 ALTER TABLE `pedidos`
-  MODIFY `PedidoID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `PedidoID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `ProductoID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
-
---
--- AUTO_INCREMENT de la tabla `superusuarios`
---
-ALTER TABLE `superusuarios`
-  MODIFY `SuperUsuarioID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ProductoID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 
 --
 -- AUTO_INCREMENT de la tabla `tarjetas`
 --
 ALTER TABLE `tarjetas`
-  MODIFY `TarjetaID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `TarjetaID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `UsuarioID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `UsuarioID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Restricciones para tablas volcadas
@@ -369,13 +358,6 @@ ALTER TABLE `carritodecompras`
 ALTER TABLE `detallesdepedido`
   ADD CONSTRAINT `detallesdepedido_ibfk_1` FOREIGN KEY (`PedidoID`) REFERENCES `pedidos` (`PedidoID`),
   ADD CONSTRAINT `detallesdepedido_ibfk_2` FOREIGN KEY (`ProductoID`) REFERENCES `productos` (`ProductoID`);
-
---
--- Filtros para la tabla `historialdecompras`
---
-ALTER TABLE `historialdecompras`
-  ADD CONSTRAINT `historialdecompras_ibfk_1` FOREIGN KEY (`UsuarioID`) REFERENCES `usuarios` (`UsuarioID`) ON DELETE CASCADE,
-  ADD CONSTRAINT `historialdecompras_ibfk_2` FOREIGN KEY (`PedidoID`) REFERENCES `pedidos` (`PedidoID`) ON DELETE CASCADE;
 
 --
 -- Filtros para la tabla `pedidos`
