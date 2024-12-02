@@ -82,10 +82,6 @@ if (!isset($_SESSION["UsuarioID"])) {
         </a>
     </nav>
 
-    <?php
-        include_once "procesos/mostrar_inventario.php";
-    ?>
-
 <!-- Sidebar -->
 <div class="col-md-4">
     <div class="card text-center">
@@ -97,6 +93,11 @@ if (!isset($_SESSION["UsuarioID"])) {
     </div>
 </div>
 
+    <?php
+        include_once "procesos/mostrar_inventario.php";
+    ?>
+
+
 <!-- Modal -->
 <div class="modal fade" id="addProductModal" tabindex="-1" aria-labelledby="addProductModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -106,15 +107,11 @@ if (!isset($_SESSION["UsuarioID"])) {
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
             </div>
             <div class="modal-body">
-                <form action="agregar_producto.php" method="POST">
+                <form action="procesos/agregar_producto.php" method="POST">
                     <div class="row g-3">
                         <div class="col-md-6">
                             <label for="productName" class="form-label">Producto</label>
                             <input type="text" class="form-control" id="productName" name="nombre" placeholder="Nombre del producto" required>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="productBrand" class="form-label">Marca</label>
-                            <input type="text" class="form-control" id="productBrand" name="marca" placeholder="Marca" required>
                         </div>
                         <div class="col-md-6">
                             <label for="productPrice" class="form-label">Precio</label>
@@ -124,14 +121,15 @@ if (!isset($_SESSION["UsuarioID"])) {
                             <label for="productCategory" class="form-label">Categoría</label>
                             <select id="productCategory" class="form-select" name="categoria" required>
                                 <option value="" selected>Seleccione</option>
-                                <option value="CONSOLES">Consolas</option>
+                                <option value="CONSOLAS">Consolas</option>
                                 <option value="ACCESORIOS">Accesorios</option>
                                 <option value="VIDEOJUEGOS">Videojuegos</option>
+                                <option value="CONTROLES">Controles</option>
                             </select>
                         </div>
                         <div class="col-12">
                             <label for="productImage" class="form-label">Imagen del producto</label>
-                            <input type="text" class="form-control" id="productImage" name="imagenURL" placeholder="URL de la imagen" required>
+                            <input type="text" class="form-control" id="productImage" name="imagenURL" placeholder="URL de la imagen">
                         </div>
                         <div class="col-12">
                             <label for="productDescription" class="form-label">Descripción del producto</label>
