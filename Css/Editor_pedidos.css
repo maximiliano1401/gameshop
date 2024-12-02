@@ -9,24 +9,55 @@ body {
     flex-direction: column;
 }
 
+/* Header styling */
 header {
-    background-color: #ffa500;
-    color: white;
-    padding: 20px;
-    text-align: center;
+    background-color: #FFA500;
+    padding: 10px 20px;
+}
+
+.header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .logo {
     font-size: 24px;
-    font-weight: bold;
+    color: #333;
 }
 
-.logo .game {
+.logo span {
     color: white;
 }
 
-.logo .shop {
-    color: red;
+.search-bar {
+    width: 400px;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+/* Barra de navegación de escritorio */
+.nav-links-desktop {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 10px 0;
+    background-color: #FFA500;
+}
+
+.nav-links-desktop a {
+    color: #333;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+}
+.nav-links-desktop a:hover {
+    text-decoration: underline;
+}
+/* Barra de navegación móvil */
+.nav-links-mobile {
+    display: none;
 }
 
 main {
@@ -129,4 +160,47 @@ main {
     margin: 0 auto;
     border: 5px solid #228b22;
     border-radius: 5px;
+}
+
+@media (max-width: 780px) {
+    .search-bar {
+        width: 90%;
+    }
+
+    .nav-links-desktop {
+        display: none; /* Oculta la barra de escritorio */
+    }
+
+    #imagenesxd {
+        display: none; /* Oculta la barra de escritorio */
+    }
+    .nav-links-mobile {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        background-color: #FFA500;
+        padding: 10px 0;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .nav-links-mobile .nav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        color: white;
+        text-decoration: none;
+        font-size: 12px;
+    }
+
+    .nav-links-mobile .nav-item i {
+        font-size: 20px;
+        margin-bottom: 5px;
+    }
+
+    .nav-links-mobile .nav-item:hover {
+        color: #fff5e6;
+    }
 }

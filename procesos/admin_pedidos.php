@@ -1,7 +1,5 @@
 <?php
-session_start();
 include_once('conexion.php');
-
 // Verificar si la sesión está activa y si el correo es el correcto (para administradores, por ejemplo)
 if (!isset($_SESSION['UsuarioID']) || $_SESSION['Correo'] !== 'max1@outlook.com') {
     header("Location: index.php");

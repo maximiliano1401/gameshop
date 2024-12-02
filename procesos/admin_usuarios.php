@@ -1,7 +1,5 @@
 <?php
-session_start();
 include_once('conexion.php');
-
 // Verificación de sesión
 if (!isset($_SESSION['UsuarioID']) || $_SESSION['Correo'] !== 'max1@outlook.com') {
     header("Location: index.php");

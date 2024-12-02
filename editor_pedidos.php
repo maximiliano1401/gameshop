@@ -1,3 +1,11 @@
+<?php
+session_start();
+include_once "conexion.php";
+if (!isset($_SESSION["UsuarioID"])) {
+    header("Location: login.php");
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
