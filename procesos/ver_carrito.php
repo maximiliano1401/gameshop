@@ -56,10 +56,10 @@ if (mysqli_num_rows($resultado) > 0) {
     echo "
     <div class='subtotal'>
     <p>Subtotal: <span>$" . $totalCarrito['TotalCarrito'] . " </span></p>
-    <form>
+    <form action='simu_pago_tarjeta.php' method='POST'>
     <button type='submit'>Pagar</button>
     </form>
-    </div>";
+    </div>";
 
 } else {
     echo "<p>No hay productos en tu carrito.</p>";
