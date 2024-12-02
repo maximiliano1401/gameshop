@@ -54,7 +54,7 @@ if (!isset($_SESSION["UsuarioID"])) {
             text-align: right;
         }
 
-        .modal-footer .save-btn, 
+        .modal-footer .save-btn,
         .modal-footer .close-btn {
             padding: 10px 20px;
             border: none;
@@ -92,10 +92,10 @@ if (!isset($_SESSION["UsuarioID"])) {
 </head>
 
 <body>
-<!-- Barra de navegación de escritorio -->
-<header>
+    <!-- Barra de navegación de escritorio -->
+    <header>
         <div class="header-container">
-        <h1 class="logo"><a href="index.php"> Game<span>Shop</span> </a></h1>
+            <h1 class="logo"><a href="index.php"> Game<span>Shop</span> </a></h1>
             <input type="text" placeholder="Buscar productos" class="search-bar">
             <nav class="nav-links-desktop">
                 <?php
@@ -159,32 +159,26 @@ if (!isset($_SESSION["UsuarioID"])) {
     </nav>
     <!-- BODY -->
     <div class="profile-info">
-   
-     
+
         <button class="button" onclick="openModal('modal-direcciones')">
             <span class="title">Dirección</span>
             <span class="description">Direcciones</span>
         </button>
 
-        <button type="button" onclick="mostrarCompraModal()">Terminar pago</button>
+        <!-- Datos de la tarjeta en un formulario OCULTO -->
+        <form id="form-validation" style="display: none;">
+            <input type="hidden" id="Direccion" value="<?php echo $Direccion ?>" />
+            <input type="hidden" id="Ciudad" value="<?php echo $Ciudad ?>" />
+            <input type="hidden" id="CodigoPostal" value="<?php echo $CodigoPostal ?>" />
+        </form>
+
+        <p id="error-message" style="color: red; display: none; font-size: 14px;"></p>
+        <button type="button" class="button-continuar" onclick="validarFormulario()">Completar el Pago</button>
 
     </div>
 
-
-
-
-
-
-
-
-
     <!-- Modales -->
     <div class="modal-overlay" id="modal-overlay"></div>
-
-    <!-- MODALES DE LOS FORMULARIOS -->
-
-
-  
 
     <!-- Modal Direcciones -->
     <div class="modal" id="modal-direcciones">
@@ -203,23 +197,20 @@ if (!isset($_SESSION["UsuarioID"])) {
         </div>
     </div>
 
-
-
     <div class="modal" id="modal-compra">
-    <div class="modal-header">Compra Exitosa</div>
-    <div class="modal-content">
-        <p>¡Gracias por tu compra! Tu pedido ha sido procesado con éxito.</p>
-        <div style="text-align: center;">
-            <!-- Espacio para la imagen -->
-            <img id="compra-imagen" src="ruta_a_tu_imagen.jpg" alt="Compra Exitosa" style="width: 100%; max-width: 300px; margin: 10px 0;">
+        <div class="modal-header">Compra Exitosa</div>
+        <div class="modal-content">
+            <p>¡Gracias por tu compra! Tu pedido ha sido procesado con éxito.</p>
+            <div style="text-align: center;">
+                <!-- Espacio para la imagen -->
+                <img id="compra-imagen" src="ruta_a_tu_imagen.jpg" alt="Compra Exitosa" style="width: 100%; max-width: 300px; margin: 10px 0;">
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="close-btn" onclick="cerrarModal()">Cerrar</button>
         </div>
     </div>
-    <div class="modal-footer">
-        <button class="close-btn" onclick="cerrarModal()">Cerrar</button>
-    </div>
-</div>
 
-    <!-- FIN DE LOS MODALES DE LOS FORMULARIOS -->
     <!-- modal De Respuesta -->
     <div class="modal fade" id="responseModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -243,10 +234,6 @@ if (!isset($_SESSION["UsuarioID"])) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
-    
-        
-
-
         function actualizarDireccion() {
             var datos = new FormData(document.getElementById("actualizar_direccion"));
             fetch('actualizar_direccion.php', {
@@ -266,20 +253,18 @@ if (!isset($_SESSION["UsuarioID"])) {
                 });
         }
 
- // Función para mostrar el modal de compra
- function mostrarCompraModal() {
-        document.getElementById('modal-compra').classList.add('modal-active');
-        document.getElementById('modal-overlay').classList.add('modal-active');
-    }
+        // Función para mostrar el modal de compra
+        function mostrarCompraModal() {
+            document.getElementById('modal-compra').classList.add('modal-active');
+            document.getElementById('modal-overlay').classList.add('modal-active');
+        }
 
-    // Reutilizar función para cerrar los modales
-    function cerrarModal() {
-        const modals = document.querySelectorAll('.modal');
-        modals.forEach(modal => modal.classList.remove('modal-active'));
-        document.getElementById('modal-overlay').classList.remove('modal-active');
-    }
-
-
+        // Reutilizar función para cerrar los modales
+        function cerrarModal() {
+            const modals = document.querySelectorAll('.modal');
+            modals.forEach(modal => modal.classList.remove('modal-active'));
+            document.getElementById('modal-overlay').classList.remove('modal-active');
+        }
 
         // Mostrar el mensaje del modal y aplicar el estilo según el status
         function mostrarModal(mensaje, tipo) {
@@ -298,6 +283,27 @@ if (!isset($_SESSION["UsuarioID"])) {
             const modals = document.querySelectorAll('.modal');
             modals.forEach(modal => modal.classList.remove('modal-active'));
             document.getElementById('modal-overlay').classList.remove('modal-active');
+        }
+
+        function validarFormulario() {
+            // Obtener los valores del formulario oculto
+            var Direccion = document.getElementById("Direccion").value;
+            var Ciudad = document.getElementById("Ciudad").value;
+            var CodigoPostal = document.getElementById("CodigoPostal").value;
+
+            // Obtener el párrafo para el mensaje de error
+            var errorMessage = document.getElementById("error-message");
+
+            // Comprobamos si algún campo está vacío
+            if (!Direccion || !Ciudad || !CodigoPostal) {
+                // Si algún campo está vacío, mostramos un mensaje de advertencia
+                errorMessage.textContent = "Por favor, complete toda la información requerida antes de continuar.";
+                errorMessage.style.display = "block"; // Hacemos visible el mensaje
+            } else {
+                // Si todo está completo, ocultamos el mensaje de error y redirigimos al proceso de pago
+                errorMessage.style.display = "none";
+                window.location.href = 'procesos/proceso_pago.php'; // O la URL que corresponda para el proceso de pago
+            }
         }
     </script>
 

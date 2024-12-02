@@ -54,7 +54,7 @@ if (!isset($_SESSION["UsuarioID"])) {
             text-align: right;
         }
 
-        .modal-footer .save-btn, 
+        .modal-footer .save-btn,
         .modal-footer .close-btn {
             padding: 10px 20px;
             border: none;
@@ -92,10 +92,10 @@ if (!isset($_SESSION["UsuarioID"])) {
 </head>
 
 <body>
-   <!-- Barra de navegación de escritorio -->
-   <header>
+    <!-- Barra de navegación de escritorio -->
+    <header>
         <div class="header-container">
-        <h1 class="logo"><a href="index.php"> Game<span>Shop</span> </a></h1>
+            <h1 class="logo"><a href="index.php"> Game<span>Shop</span> </a></h1>
             <input type="text" placeholder="Buscar productos" class="search-bar">
             <nav class="nav-links-desktop">
                 <?php
@@ -164,119 +164,149 @@ if (!isset($_SESSION["UsuarioID"])) {
             <span class="title">Tarjetas</span>
             <span class="description">Información de tarjetas</span>
         </button>
-        <button type="button" onclick="location.href='simu_pago_direccion.php'">Continuar</button>
+
+        <!-- Datos de la tarjeta en un formulario OCULTO -->
+        <form id="form-validation" style="display: none;">
+            <input type="hidden" id="NumeroTarjeta" value="<?php echo $NumeroTarjeta ?>" />
+            <input type="hidden" id="NombreTitular" value="<?php echo $NombreTitular ?>" />
+            <input type="hidden" id="FechaExpiracion" value="<?php echo $FechaExpiracion ?>" />
+            <input type="hidden" id="CVV" value="<?php echo $CVV ?>" />
+            <input type="hidden" id="TipoTarjeta" value="<?php echo $TipoTarjeta ?>" />
+        </form>
+
+        <p id="error-message" style="color: red; display: none; font-size: 14px;"></p>
+        <button type="button" class="button-continuar" onclick="validarFormulario()">Continuar</button>
     </div>
 
-    <!-- Modales -->
-    <div class="modal-overlay" id="modal-overlay"></div>
+        <!-- Modales -->
+        <div class="modal-overlay" id="modal-overlay"></div>
 
-    <!-- Modal Tarjetas -->
-    <div class="modal" id="modal-tarjetas">
-        <div class="modal-header">Editar Información de Tarjetas</div>
-        <div class="modal-content">
-            <form id="actualizar_tarjeta">
-                <input type="hidden" value="<?php echo $UsuarioID ?>" name="UsuarioID" />
-                <input type="text" placeholder="Número de tarjeta" value="<?php echo $NumeroTarjeta ?>" name="NumeroTarjeta" />
-                <input type="text" placeholder="Nombre del Titular" value="<?php echo $NombreTitular ?>" name="NombreTitular" />
-                <input type="date" placeholder="Fecha de vencimiento" value="<?php echo $FechaExpiracion ?>" name="FechaExpiracion" />
-                <input type="password" placeholder="CVV" value="<?php echo $CVV ?>" name="CVV" />
-                <select name="TipoTarjeta" id="TipoTarjeta">
-                    <option value="" disabled <?php echo ($TipoTarjeta == "") ? 'selected' : ''; ?>>Seleccione un tipo de tarjeta</option>
-                    <option value="Credito" <?php echo ($TipoTarjeta == "Credito") ? 'selected' : ''; ?>>Crédito</option>
-                    <option value="Debito" <?php echo ($TipoTarjeta == "Debito") ? 'selected' : ''; ?>>Débito</option>
-                </select>
-            </form>
-        </div>
-        <div class="modal-footer">
-            <button class="close-btn" onclick="closeModal()">Cancelar</button>
-            <button class="save-btn" onclick="actualizarTarjeta()">Guardar </button>
-        </div>
-    </div>
-
-    <!-- FIN DE LOS MODALES DE LOS FORMULARIOS -->
-
-    <!-- modal De Respuesta -->
-    <div class="modal fade" id="responseModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <!-- Modal Tarjetas -->
+        <div class="modal" id="modal-tarjetas">
+            <div class="modal-header">Editar Información de Tarjetas</div>
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalLabel">Mensaje</h5>
+                <form id="actualizar_tarjeta">
+                    <input type="hidden" value="<?php echo $UsuarioID ?>" name="UsuarioID" />
+                    <input type="text" placeholder="Número de tarjeta" value="<?php echo $NumeroTarjeta ?>" name="NumeroTarjeta" />
+                    <input type="text" placeholder="Nombre del Titular" value="<?php echo $NombreTitular ?>" name="NombreTitular" />
+                    <input type="date" placeholder="Fecha de vencimiento" value="<?php echo $FechaExpiracion ?>" name="FechaExpiracion" />
+                    <input type="password" placeholder="CVV" value="<?php echo $CVV ?>" name="CVV" />
+                    <select name="TipoTarjeta" id="TipoTarjeta">
+                        <option value="" disabled <?php echo ($TipoTarjeta == "") ? 'selected' : ''; ?>>Seleccione un tipo de tarjeta</option>
+                        <option value="Credito" <?php echo ($TipoTarjeta == "Credito") ? 'selected' : ''; ?>>Crédito</option>
+                        <option value="Debito" <?php echo ($TipoTarjeta == "Debito") ? 'selected' : ''; ?>>Débito</option>
+                    </select>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="close-btn" onclick="closeModal()">Cancelar</button>
+                <button class="save-btn" onclick="actualizarTarjeta()">Guardar </button>
+            </div>
+        </div>
 
-                </div>
-                <div class="modal-body" id="modal-message">
-                    <!-- El mensaje se mostrará aquí -->
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="document.location.reload();">Cerrar</button>
+        <!-- FIN DE LOS MODALES DE LOS FORMULARIOS -->
+
+        <!-- modal De Respuesta -->
+        <div class="modal fade" id="responseModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalLabel">Mensaje</h5>
+
+                    </div>
+                    <div class="modal-body" id="modal-message">
+                        <!-- El mensaje se mostrará aquí -->
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="document.location.reload();">Cerrar</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Agregar enlaces a jQuery y Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Agregar enlaces a jQuery y Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
 
-    <script>
-   
+        <script>
+            function actualizarTarjeta() {
+                var datos = new FormData(document.getElementById("actualizar_tarjeta"));
+                fetch('actualizar_tarjeta.php', {
+                        method: 'POST',
+                        body: datos
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.status === 'success') {
+                            mostrarModal(data.message, 'success');
+                        } else {
+                            mostrarModal(data.message, 'error');
+                        }
+                    })
+                    .catch(error => {
+                        mostrarModal("Ocurrió un error al intentar registrar la tarjeta. Intente de nuevo.", 'error');
+                    });
+            }
 
-        function actualizarTarjeta() {
-            var datos = new FormData(document.getElementById("actualizar_tarjeta"));
-            fetch('actualizar_tarjeta.php', {
-                    method: 'POST',
-                    body: datos
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.status === 'success') {
-                        mostrarModal(data.message, 'success');
-                    } else {
-                        mostrarModal(data.message, 'error');
-                    }
-                })
-                .catch(error => {
-                    mostrarModal("Ocurrió un error al intentar registrar la tarjeta. Intente de nuevo.", 'error');
-                });
-        }
+            function actualizarDireccion() {
+                var datos = new FormData(document.getElementById("actualizar_direccion"));
+                fetch('actualizar_direccion.php', {
+                        method: 'POST',
+                        body: datos
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.status === 'success') {
+                            mostrarModal(data.message, 'success');
+                        } else {
+                            mostrarModal(data.message, 'error');
+                        }
+                    })
+                    .catch(error => {
+                        mostrarModal("Ocurrió un error al intentar registrar la dirección. Intente de nuevo.", 'error');
+                    });
+            }
 
-        function actualizarDireccion() {
-            var datos = new FormData(document.getElementById("actualizar_direccion"));
-            fetch('actualizar_direccion.php', {
-                    method: 'POST',
-                    body: datos
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.status === 'success') {
-                        mostrarModal(data.message, 'success');
-                    } else {
-                        mostrarModal(data.message, 'error');
-                    }
-                })
-                .catch(error => {
-                    mostrarModal("Ocurrió un error al intentar registrar la dirección. Intente de nuevo.", 'error');
-                });
-        }
+            // Mostrar el mensaje del modal y aplicar el estilo según el status
+            function mostrarModal(mensaje, tipo) {
+                const modalMessage = document.getElementById("modal-message");
+                modalMessage.textContent = mensaje;
+                // Mostrar el modal usando Bootstrap
+                $('#responseModal').modal('show');
+            }
 
-        // Mostrar el mensaje del modal y aplicar el estilo según el status
-        function mostrarModal(mensaje, tipo) {
-            const modalMessage = document.getElementById("modal-message");
-            modalMessage.textContent = mensaje;
-            // Mostrar el modal usando Bootstrap
-            $('#responseModal').modal('show');
-        }
+            function openModal(modalId) {
+                document.getElementById(modalId).classList.add('modal-active');
+                document.getElementById('modal-overlay').classList.add('modal-active');
+            }
 
-        function openModal(modalId) {
-            document.getElementById(modalId).classList.add('modal-active');
-            document.getElementById('modal-overlay').classList.add('modal-active');
-        }
+            function closeModal() {
+                const modals = document.querySelectorAll('.modal');
+                modals.forEach(modal => modal.classList.remove('modal-active'));
+                document.getElementById('modal-overlay').classList.remove('modal-active');
+            }
 
-        function closeModal() {
-            const modals = document.querySelectorAll('.modal');
-            modals.forEach(modal => modal.classList.remove('modal-active'));
-            document.getElementById('modal-overlay').classList.remove('modal-active');
-        }
-    </script>
+            function validarFormulario() {
+                // Obtener los valores del formulario oculto
+                var numeroTarjeta = document.getElementById("NumeroTarjeta").value;
+                var nombreTitular = document.getElementById("NombreTitular").value;
+                var fechaExpiracion = document.getElementById("FechaExpiracion").value;
+                var cvv = document.getElementById("CVV").value;
+                var tipoTarjeta = document.getElementById("TipoTarjeta").value;
+
+                // Obtener el párrafo para el mensaje de error
+                var errorMessage = document.getElementById("error-message");
+
+                // Comprobamos si algún campo está vacío
+                if (!numeroTarjeta || !nombreTitular || !fechaExpiracion || !cvv || !tipoTarjeta) {
+                    errorMessage.textContent = "Por favor, complete toda la información requerida antes de continuar.";
+                    errorMessage.style.display = "block"; // Hacemos visible el mensaje
+                } else {
+                    errorMessage.style.display = "none";
+                    window.location.href = 'simu_pago_direccion.php'; 
+                }
+            }
+        </script>
 
 </body>
 
