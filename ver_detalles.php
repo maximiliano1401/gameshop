@@ -94,16 +94,19 @@ include_once "procesos/ver_detalle_producto.php";
     <!-- Barra de navegación de escritorio -->
     <header>
         <div class="header-container">
-            <h1 class="logo">Game<span>Shop</span></h1>
+        <h1 class="logo"><a href="index.php"> Game<span>Shop</span> </a></h1>
             <input type="text" placeholder="Buscar productos" class="search-bar">
             <nav class="nav-links-desktop">
                 <?php
-                if (!isset($_SESSION["Nombre"])) {
+                if (isset($_SESSION["UsuarioID"])) {
+                    if ($_SESSION['Correo'] == 'max1@outlook.com') {
+                        echo "<a href='panel_admin.php' class='nav-link'>Panel de administrador</a>";
+                    }
+                    echo "<a href='perfil.php'>" . $_SESSION["PrimerNombre"] . "</a>";
+                    echo "<a href='procesos/cerrar_sesion.php'>Cerrar Sesión</a>";
+                } else {
                     echo "<a href='registro.php'>Crear cuenta</a>";
                     echo "<a href='login.php'>Ingresar</a>";
-                } else {
-                    echo "<a href='perfil.php'>" . $_SESSION["Nombre"] . "</a>";
-                    echo "<a href='procesos/cerrar_sesion.php'>Cerrar Sesión</a>";
                 }
                 ?>
                 <a href="">Categorías</a>
@@ -115,7 +118,19 @@ include_once "procesos/ver_detalle_producto.php";
     <!-- Barra de navegación móvil -->
     <nav class="nav-links-mobile">
         <?php
-        if (!isset($_SESSION["Nombre"])) {
+        if (isset($_SESSION["UsuarioID"])) {
+            if ($_SESSION['Correo'] == 'max1@outlook.com') {
+                echo "<a href='panel_admin.php'class='nav-item'>
+                <i class=''></i>
+                <span> ADMIN </span>
+                </a>";
+            }
+            echo "
+            <a href='perfil.php' class='nav-item'>
+                <i class='fas fa-user'></i>
+                <span>" . $_SESSION["PrimerNombre"] . "</span>
+            </a>";
+        } else {
             echo "
             <a href='registro.php' class='nav-item'>
                 <i class='fas fa-user-plus'></i>
@@ -125,19 +140,8 @@ include_once "procesos/ver_detalle_producto.php";
                 <i class='fas fa-sign-in-alt'></i>
                 <span>Ingresar</span>
             </a>";
-        } else {
-            echo "
-            <a href='perfil.php' class='nav-item'>
-                <i class='fas fa-user'></i>
-                <span>" . $_SESSION["Nombre"] . "</span>
-            </a>
-            <a href='procesos/cerrar_sesion.php' class='nav-item'>
-                <i class='fas fa-sign-out-alt'></i>
-                <span>Salir</span>
-            </a>";
         }
         ?>
-
         <a href="index.php" class="nav-item">
             <i class="fas fa-home"></i>
             <span>Inicio</span>
