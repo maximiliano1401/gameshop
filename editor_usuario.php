@@ -7,10 +7,71 @@
     <link rel="stylesheet" href="Css/editor_usuario.css">
 </head>
 <body>
-    <header class="header">
-        <div class="logo">
-            <span class="game">Game</span><span class="shop">Shop</span>
+ <!-- Barra de navegación de escritorio -->
+ <header>
+        <div class="header-container">
+        <h1 class="logo"><a href="index.php"> Game<span>Shop</span> </a></h1>
+            <input type="text" placeholder="Buscar productos" class="search-bar">
+            <nav class="nav-links-desktop">
+                <?php
+                if (isset($_SESSION["UsuarioID"])) {
+                    if ($_SESSION['Correo'] == 'max1@outlook.com') {
+                        echo "<a href='panel_admin.php' class='nav-link'>Panel de administrador</a>";
+                    }
+                    echo "<a href='perfil.php'>" . $_SESSION["PrimerNombre"] . "</a>";
+                    echo "<a href='procesos/cerrar_sesion.php'>Cerrar Sesión</a>";
+                } else {
+                    echo "<a href='registro.php'>Crear cuenta</a>";
+                    echo "<a href='login.php'>Ingresar</a>";
+                }
+                ?>
+                <a href="">Categorías</a>
+                <a href="carrito_compras.php">Carrito</a>
+                <a href="mis_pedidos.php">Historial</a>
+            </nav>
         </div>
+    </header>
+    <!-- Barra de navegación móvil -->
+    <nav class="nav-links-mobile">
+        <?php
+        if (isset($_SESSION["UsuarioID"])) {
+            if ($_SESSION['Correo'] == 'max1@outlook.com') {
+                echo "<a href='panel_admin.php'class='nav-item'>
+                <i class=''></i>
+                <span> ADMIN </span>
+                </a>";
+            }
+            echo "
+            <a href='perfil.php' class='nav-item'>
+                <i class='fas fa-user'></i>
+                <span>" . $_SESSION["PrimerNombre"] . "</span>
+            </a>";
+        } else {
+            echo "
+            <a href='registro.php' class='nav-item'>
+                <i class='fas fa-user-plus'></i>
+                <span>Crear</span>
+            </a>
+            <a href='login.php' class='nav-item'>
+                <i class='fas fa-sign-in-alt'></i>
+                <span>Ingresar</span>
+            </a>";
+        }
+        ?>
+
+        <a href="index.php" class="nav-item">
+            <i class="fas fa-home"></i>
+            <span>Inicio</span>
+        </a>
+        <a href="carrito_compras.php" class="nav-item">
+            <i class="fas fa-shopping-cart"></i>
+            <span>Carrito</span>
+        </a>
+        <a href="" class="nav-item">
+            <i class="fas fa-bars"></i>
+            <span>Categorías</span>
+        </a>
+    </nav>
         <h1>Usuarios</h1>
     </header>
     <main class="content">
