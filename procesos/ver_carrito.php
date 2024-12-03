@@ -8,6 +8,15 @@ if (!isset($_SESSION['UsuarioID'])) {
 
 $usuarioID = $_SESSION['UsuarioID'];
 
+// Comprobar si se ha recibido una solicitud para eliminar un producto
+if (isset($_GET['eliminar']) && isset($_GET['productoID'])) {
+    $productoID = $_GET['productoID'];
+    $eliminarSQL = "DELETE FROM carritodecompras WHERE UsuarioID = $usuarioID AND ProductoID = $productoID";
+    mysqli_query($conexion, $eliminarSQL);
+    echo "<p style: color='red'> Producto eliminado del carrito.</p>";
+    // header("Location: carrito_compras.php");
+}
+
 // Consulta SQL para obtener los productos del carrito
 $sql = "SELECT 
         p.ProductoID,
@@ -35,12 +44,17 @@ if (mysqli_num_rows($resultado) > 0) {
         echo "<div class='cart-item'>
             <img src='" . $fila['ImagenURL'] . "' alt='" . $fila['Producto'] . "'>
             <div class='item-details'>
-            <h3>" . $fila['Producto'] . "</h3>
-            <p>$" . $fila['PrecioUnitario'] . "</p>
+                <h3>" . $fila['Producto'] . "</h3>
+                <p>$" . $fila['PrecioUnitario'] . "</p>
+                <p>Cantidad: " . $fila['Cantidad'] . "</p>
+                <p>Subtotal: $" . $fila['Subtotal'] . "</p>
+                <form action='' method='GET'>
+                    <input type='hidden' name='productoID' value='" . $fila['ProductoID'] . "'>
+                    <button type='submit' name='eliminar' value='1'>Eliminar</button>
+                </form>
             </div>
-            </div>";
+        </div>";
     }
-
 
     // Sumar el total del carrito
     $totalCarritoSQL = "
@@ -59,10 +73,11 @@ if (mysqli_num_rows($resultado) > 0) {
     <form action='simu_pago_tarjeta.php' method='POST'>
     <button type='submit'>Pagar</button>
     </form>
-    </div>";
+    </div>";
 
 } else {
     echo "<p>No hay productos en tu carrito.</p>";
 }
 
 mysqli_close($conexion);
+?>
