@@ -14,6 +14,7 @@ if (!isset($_SESSION["UsuarioID"])) {
     <title>Inventario</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="Css/anadir_inventario.css">
 </head>
 <body>
@@ -107,7 +108,7 @@ if (!isset($_SESSION["UsuarioID"])) {
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
             </div>
             <div class="modal-body">
-                <form action="procesos/agregar_producto.php" method="POST">
+                <form action="procesos/agregar_producto.php" method="POST" enctype="multipart/form-data">
                     <div class="row g-3">
                         <div class="col-md-6">
                             <label for="productName" class="form-label">Producto</label>
@@ -129,7 +130,7 @@ if (!isset($_SESSION["UsuarioID"])) {
                         </div>
                         <div class="col-12">
                             <label for="productImage" class="form-label">Imagen del producto</label>
-                            <input type="text" class="form-control" id="productImage" name="imagenURL" placeholder="URL de la imagen">
+                            <input type="file" class="form-control" id="productImage" name="imagenURL" required>
                         </div>
                         <div class="col-12">
                             <label for="productDescription" class="form-label">Descripción del producto</label>
