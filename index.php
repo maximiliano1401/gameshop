@@ -19,8 +19,15 @@ session_start();
     <!-- Barra de navegación de escritorio -->
     <header>
         <div class="header-container">
-        <h1 class="logo"><a href="index.php"> Game<span>Shop</span> </a></h1>
-            <input type="text" placeholder="Buscar productos" class="search-bar">
+            <h1 class="logo"><a href="index.php"> Game<span>Shop</span> </a></h1>
+            <!-- Formulario de búsqueda -->
+            <form method="GET" action="index.php" class="search-form">
+                <input type="text" name="search" placeholder="Buscar productos" class="search-bar" value="<?php echo isset($_GET['search']) ? $_GET['search'] : ''; ?>">
+                <!-- Botón para realizar la búsqueda -->
+                <button type="submit" class="search-button">
+                    <i class="fas fa-search"></i> Buscar
+                </button>
+            </form>
             <nav class="nav-links-desktop">
                 <?php
                 if (isset($_SESSION["UsuarioID"])) {
@@ -86,27 +93,28 @@ session_start();
         <h2>Descubre videojuegos por menos de $699</h2>
     </section>
     <!-- Categorías -->
+    <!-- Categorías -->
     <section class="categories" id="imagenesxd">
-        <div class="category">
-            <img src="img_products/nitendo.png" alt="Nintendo Switch">
-            Nintendo Switch
-        </div>
-        <div class="category">
-            <img src="img_products/play.webp" alt="PlayStation 5">
-            PlayStation 5
-        </div>
-        <div class="category">
-            <img src="img_products/xbox.png" alt="Xbox Series X|S">
-            Xbox Series X|S
-        </div>
-        <div class="category">
-            <img src="accessories.png" alt="Controles y accesorios">
-            Controles y accesorios
-        </div>
-        <div class="category">
-            <img src="accessories.png" alt="Controles y accesorios">
-            Video Juegos
-        </div>
+        <?php
+        $categorias = [
+            "Nintendo" => "img_products/nitendo.png",
+            "PlayStation" => "img_products/play.webp",
+            "Xbox" => "img_products/xbox.png",
+            "Accesorios" => "accessories.png",
+            "Videojuegos" => "accessories.png"
+        ];
+        $activeCategory = isset($_GET['search']) ? $_GET['search'] : '';
+        foreach ($categorias as $categoria => $imagen) {
+            $isActive = ($categoria === $activeCategory) ? "active" : "";
+            echo "
+            <div class='category'>
+                <a href='index.php?search=$categoria' class='$isActive'>
+                    <img src='$imagen' alt='$categoria'>
+                    $categoria
+                </a>
+            </div>";
+        }
+        ?>
     </section>
     <!-- Productos -->
     <?php include "procesos/mostrar_productos.php"; ?>
