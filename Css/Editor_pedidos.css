@@ -167,6 +167,33 @@ main {
     border-radius: 5px;
 }
 
+.search-form {
+    display: flex;
+    align-items: center;
+}
+
+.search-bar {
+    padding: 8px;
+    margin-right: 10px;
+    width: 250px;
+}
+
+.search-button {
+    background-color: #007bff;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.search-button i {
+    margin-right: 5px;
+}
+
+.search-button:hover {
+    background-color: #0056b3;
+}
+
 @media (max-width: 780px) {
     .search-bar {
         width: 90%;
