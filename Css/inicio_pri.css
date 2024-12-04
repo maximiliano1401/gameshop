@@ -212,6 +212,10 @@ header {
     max-width: 160px; /* Ajusta el ancho máximo del texto */
     font-size: 12px; /* Reduce el tamaño de la fuente para pantallas pequeñas */
   }
+
+  .banner p{
+    font-size: 15px;
+  }
 }
 /* Banner styling */
 .banner {
