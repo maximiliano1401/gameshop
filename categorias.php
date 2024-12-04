@@ -209,10 +209,10 @@ session_start();
         <?php
         $categorias = [
             "Nintendo" => "img_products/nitendo.png",
-            "PlayStation" => "img_products/logoplay.png",
-            "Xbox" => "img_products/xbox_logo.png",
-            "Accesorios" => "img_products/acce.png",
-            "Videojuegos" => "img_products/videojuegos.png"
+            "PlayStation" => "img_products/logoplay.jpg",
+            "Xbox" => "img_products/xbox_logo.jpg",
+            "Accesorios" => "img_products/acce.jpg",
+            "Videojuegos" => "img_products/videojuegos.jpg"
         ];
         $activeCategory = isset($_GET['search']) ? $_GET['search'] : '';
         foreach ($categorias as $categoria => $imagen) {

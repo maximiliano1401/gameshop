@@ -104,8 +104,8 @@ session_start();
         <div class="carousel-inner">
             <!-- Primera diapositiva -->
             <div class="carousel-item active">
-                <img src="img/banner1.jpg" class="d-block w-100" alt="Banner 1">
-                <div class="carousel-caption d-none d-md-block">
+                <img src="img_products/banner1.png" class="d-block w-100" alt="Banner 1">
+                <div class="carousel-caption d-md-block">
                     <h5 class="text-light">Grandes ofertas en videojuegos</h5>
                     <p class="text-light">Encuentra títulos emocionantes por menos de $699.</p>
                 </div>
@@ -113,8 +113,8 @@ session_start();
 
             <!-- Segunda diapositiva -->
             <div class="carousel-item">
-                <img src="img/banner2.jpg" class="d-block w-100" alt="Banner 2">
-                <div class="carousel-caption d-none d-md-block">
+                <img src="img_products/banner2.jpg" class="d-block w-100" alt="Banner 2">
+                <div class="carousel-caption d-md-block">
                     <h5 class="text-light">Accesorios a precios bajos</h5>
                     <p class="text-light">Complementa tu experiencia gaming con increíbles accesorios.</p>
                 </div>
@@ -122,8 +122,8 @@ session_start();
 
             <!-- Tercera diapositiva -->
             <div class="carousel-item">
-                <img src="img/banner3.jpg" class="d-block w-100" alt="Banner 3">
-                <div class="carousel-caption d-none d-md-block">
+                <img src="img_products/banner3.jpg_large" class="d-block w-100" alt="Banner 3">
+                <div class="carousel-caption d-md-block">
                     <h5 class="text-light">Las últimas consolas</h5>
                     <p class="text-light">Descubre la nueva generación de consolas disponibles ahora.</p>
                 </div>
@@ -147,10 +147,10 @@ session_start();
         <?php
         $categorias = [
             "Nintendo" => "img_products/nitendo.png",
-            "PlayStation" => "img_products/logoplay.png",
-            "Xbox" => "img_products/xbox_logo.png",
-            "Accesorios" => "img_products/acce.png",
-            "Videojuegos" => "img_products/videojuegos.png"
+            "PlayStation" => "img_products/logoplay.jpg",
+            "Xbox" => "img_products/xbox_logo.jpg",
+            "Accesorios" => "img_products/acce.jpg",
+            "Videojuegos" => "img_products/videojuegos.jpg"
         ];
         $activeCategory = isset($_GET['search']) ? $_GET['search'] : '';
         foreach ($categorias as $categoria => $imagen) {
