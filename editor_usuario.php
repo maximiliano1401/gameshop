@@ -96,8 +96,7 @@ if (!isset($_SESSION["UsuarioID"])) {
         ?>
         
     </main>
-    <footer class="footer">
-        <div class="pipe"></div>
-    </footer>
+    <p style="margin-top: 50px;"></p>
+
 </body>
 </html>

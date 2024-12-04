@@ -101,7 +101,7 @@ if (!isset($_SESSION["UsuarioID"])) {
     <?php
         include_once "procesos/mostrar_inventario.php";
     ?>
-
+    <p style="margin-top: 50px;"></p>
 
 <!-- Modal -->
 <div class="modal fade" id="addProductModal" tabindex="-1" aria-labelledby="addProductModalLabel" aria-hidden="true">
