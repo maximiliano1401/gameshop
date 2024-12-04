@@ -273,6 +273,11 @@ header {
 }
 
 @media (max-width: 780px) {
+    .header-container {
+        flex-direction: column;
+        gap: 10px;
+    }
+
     /* Sección de productos relacionados en pantallas móviles */
     .productos-grid {
         display: grid;

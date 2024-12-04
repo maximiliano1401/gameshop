@@ -98,6 +98,11 @@ header {
 }
 
 @media (max-width: 780px) {
+    .header-container {
+        flex-direction: column;
+        gap: 10px;
+    }
+
     .search-bar {
         width: 90%;
     }
