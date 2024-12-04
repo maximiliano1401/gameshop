@@ -83,7 +83,7 @@ if (!isset($_SESSION["UsuarioID"])) {
             <i class="fas fa-shopping-cart"></i>
             <span>Carrito</span>
         </a>
-        <a href="" class="nav-item">
+        <a href="categorias.php" class="nav-item">
             <i class="fas fa-bars"></i>
             <span>Categorías</span>
         </a>
@@ -103,7 +103,7 @@ if (!isset($_SESSION["UsuarioID"])) {
     <?php
         include_once "procesos/mostrar_inventario.php";
     ?>
-    <p style="margin-top: 50px;"></p>
+    <p style="margin-top: 100px;"></p>
 
 <!-- Modal -->
 <div class="modal fade" id="addProductModal" tabindex="-1" aria-labelledby="addProductModalLabel" aria-hidden="true">

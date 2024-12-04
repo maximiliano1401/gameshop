@@ -168,7 +168,7 @@ session_start();
     <!-- Productos -->
     <?php include "procesos/mostrar_productos.php"; ?>
 
-    <p style="margin-top: 50px;"></p>
+    <p style="margin-top: 100px;"></p>
 
 </body>
 

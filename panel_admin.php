@@ -158,7 +158,7 @@ if (!isset($_SESSION["UsuarioID"])) {
             <i class="fas fa-shopping-cart"></i>
             <span>Carrito</span>
         </a>
-        <a href="" class="nav-item">
+        <a href="categorias.php" class="nav-item">
             <i class="fas fa-bars"></i>
             <span>Categorías</span>
         </a>
@@ -184,6 +184,7 @@ if (!isset($_SESSION["UsuarioID"])) {
         <button type="button" onclick="location.href='procesos/cerrar_sesion.php'">Cerrar Sesion</button>
 
     </div>
+    <p style="margin-top: 100px;"></p>
 </body>
 
 </html>

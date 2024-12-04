@@ -156,7 +156,7 @@ include_once "procesos/ver_detalle_producto.php";
             <i class="fas fa-shopping-cart"></i>
             <span>Carrito</span>
         </a>
-        <a href="" class="nav-item">
+        <a href="categorias.php" class="nav-item">
             <i class="fas fa-bars"></i>
             <span>Categorías</span>
         </a>

@@ -158,7 +158,7 @@ if (!isset($_SESSION["UsuarioID"])) {
             <i class="fas fa-shopping-cart"></i>
             <span>Carrito</span>
         </a>
-        <a href="" class="nav-item">
+        <a href="categorias.php" class="nav-item">
             <i class="fas fa-bars"></i>
             <span>Categorías</span>
         </a>
@@ -289,6 +289,7 @@ if (!isset($_SESSION["UsuarioID"])) {
             </div>
         </div>
     </div>
+    <p style="margin-top: 100px;"></p>
 
     <!-- Agregar enlaces a jQuery y Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

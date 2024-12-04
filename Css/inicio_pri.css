@@ -74,6 +74,7 @@ color: #333;
     }
 
     .product {
+        min-width: 200px;
         background-color: white;
         border: 1px solid #ddd;
         border-radius: 8px;
@@ -183,10 +184,12 @@ margin-left: 5px;
         /* Modificar el grid para pantallas pequeñas */
         .products {
             grid-template-columns: repeat(2, 1fr); /* Dos columnas en lugar de múltiples columnas automáticas */
+            padding: 10px;
         }
     
         .product {
-            max-width: 180px; /* Elimina la restricción de ancho máximo */
+            min-width: 160px;
+            max-width: 160px; /* Elimina la restricción de ancho máximo */
         }
     
         .product img {

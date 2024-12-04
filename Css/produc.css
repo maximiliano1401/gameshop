@@ -286,7 +286,7 @@ header {
         border-radius: 8px;
         padding: 10px;
         text-align: center;
-        width: auto; /* Eliminar el ancho fijo para que se ajuste mejor */
+        /* width: auto; */
     }
 
     .producto-relacionado img {
