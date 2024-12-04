@@ -7,7 +7,7 @@ $search = isset($_GET['search']) ? $_GET['search'] : '';
 // Si hay un término de búsqueda, usamos LIKE en la consulta
 if ($search) {
     // Consulta SQL con LIKE para buscar productos por nombre o descripción
-    $sql = "SELECT * FROM productos WHERE Nombre LIKE ? OR Descripcion LIKE ?";
+    $sql = "SELECT * FROM productos WHERE Nombre LIKE ? OR Categoria LIKE ?";
     $stmt = mysqli_prepare($conexion, $sql);
     
     // Preparar el término de búsqueda con comodines %

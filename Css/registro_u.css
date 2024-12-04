@@ -1,19 +1,26 @@
-/* Variables de estilo */
+/* Variables de colores y estilos */
 :root {
-    --color-fondo-formulario: #ffffff;
-    --color-fondo-imagen: #ffa500;
+    --color-fondo-principal: #333;
+    --color-fondo-blanco: #fff;
     --color-acento: #ffa500;
-    --color-boton: #ffa500;
-    --color-boton-hover: #ff8c00;
+    --color-acento-hover: #ff8c00;
     --color-texto: #333;
-    --color-texto-boton: #ffffff;
+    --color-blanco: #fff;
+    --color-link: #007bff;
+    --color-fondo-bienvenida: #ffa500;
+    --color-tuberia: #32CD32;
+    --color-tuberia-borde: #228B22;
+    --color-base: #8B4513;
 
     --radio-borde: 20px;
-    --ancho-contenedor: 100vw;
-    --alto-contenedor: 100vh;
+    --tamano-texto-titulo: 28px;
+    --tamano-texto-subtitulo: 40px;
+    --tamano-texto-bienvenida: 32px;
+    --ancho-contenedor: 100%;
+    --alto-contenedor: 100%;
 }
 
-/* Estilos generales */
+/* General Reset */
 * {
     margin: 0;
     padding: 0;
@@ -21,25 +28,28 @@
     font-family: Arial, sans-serif;
 }
 
-body {
+html, body {
+    width: 100%;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
-    height: 100vh;
-    background-color: #333;
+    background-color: var(--color-fondo-principal);
+    margin: 0;
+    overflow: hidden;
 }
 
+/* Contenedor de pantalla completa */
 .container {
-    display: flex;
     width: var(--ancho-contenedor);
-    height: var(--alto-contenedor);
+    height: 100vh;  /* Asegura que ocupe toda la altura de la ventana */
+    display: flex;
 }
 
 /* Sección Izquierda (Formulario) */
 .form-section {
     width: 50%;
-    background-color: var(--color-fondo-formulario);
+    background-color: var(--color-fondo-blanco);
     padding: 40px;
     display: flex;
     flex-direction: column;
@@ -48,60 +58,145 @@ body {
 }
 
 .form-section h2 {
-    font-size: 28px;
-    color: var(--color-texto);
     margin-bottom: 20px;
+    font-size: var(--tamano-texto-titulo);
+    font-weight: bold;
 }
 
 .form-section label {
     width: 100%;
-    font-size: 16px;
-    margin-top: 10px;
+    font-size: 14px;
+    margin: 10px 0 5px;
     color: var(--color-texto);
 }
 
 .form-section input {
     width: 100%;
-    padding: 12px;
+    padding: 10px;
     font-size: 16px;
-    border: 1px solid #ddd;
     border-radius: var(--radio-borde);
-    margin-bottom: 15px;
+    border: 1px solid #ddd;
     background-color: #eee;
+    margin-bottom: 15px;
 }
 
 .form-section button {
     width: 100%;
-    padding: 12px;
+    padding: 10px;
     font-size: 16px;
     border: none;
     border-radius: var(--radio-borde);
-    color: var(--color-texto-boton);
-    background-color: var(--color-boton);
+    color: var(--color-blanco);
+    background-color: var(--color-acento);
     cursor: pointer;
     margin-top: 10px;
 }
 
 .form-section button:hover {
-    background-color: var(--color-boton-hover);
+    background-color: var(--color-acento-hover);
 }
 
-/* Sección Derecha (Imagen) */
-.image-section {
+.form-section a {
+    font-size: 14px;
+    color: var(--color-link);
+    text-decoration: none;
+    margin-top: 10px;
+}
+
+/* Botón de iniciar sesión en el lado izquierdo */
+.login-button {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: var(--radio-borde);
+    color: var(--color-blanco);
+    background-color: #4CAF50;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.login-button:hover {
+    background-color: #45a049;
+}
+
+/* Sección Derecha (Bienvenida) */
+.welcome-section {
+    display: none;  /* Ocultar la sección de bienvenida */
     width: 50%;
-    background-color: var(--color-fondo-imagen);
+    background-color: var(--color-fondo-bienvenida);
+    color: var(--color-blanco);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    height: 100vh;  /* Ocupa toda la altura de la ventana */
+}
+
+.welcome-section h1 {
+    font-size: var(--tamano-texto-subtitulo);
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.welcome-section h2 {
+    font-size: var(--tamano-texto-bienvenida);
+    margin-bottom: 40px;
+}
+
+.pipe-icon {
     display: flex;
     justify-content: center;
     align-items: center;
-    position: relative;
+    width: 100%;
+    padding-top: 20px;
 }
 
-.image-section::before {
-    content: "";
-    background-image: url('ruta/de/tu/imagen.png'); /* Ruta de la imagen */
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    width: 90%;
-    height: 90%;
+.pipe-icon img {
+    width: 300px;
+    height: auto;
+    max-width: 100%;
+    object-fit: contain;
+}
+
+/* Media Query para pantallas con un ancho máximo de 780px */
+@media (max-width: 780px) {
+    /* Contenedor de pantalla completa: cambian las proporciones */
+    .container {
+        flex-direction: column;
+        height: 100%;
+    }
+
+    /* Sección izquierda (Formulario) */
+    .form-section {
+        width: 100%; /* Asegura que ocupe el 100% del ancho */
+        height: 100%; /* Ocupa el 50% de la altura de la ventana */
+        padding: 20px;
+    }
+
+    /* Sección derecha (Bienvenida) */
+    .welcome-section {
+        display: none; /* La sección de bienvenida permanece oculta */
+    }
+
+    /* Mover el botón de registro debajo del botón de inicio de sesión */
+    .form-section button {
+        margin-bottom: 10px; /* Separar un poco los botones */
+    }
+
+    .form-section a {
+        margin-top: 10px;
+        display: block;
+        text-align: center;
+    }
+
+    .form-section a button {
+        width: 100%; /* El botón de registro también debe ocupar todo el ancho */
+        margin-top: 10px; /* Separar un poco el botón del resto */
+    }
+
+    .pipe-icon img {
+        width: 200px; /* Ajustar el tamaño de la imagen */
+    }
 }
