@@ -1,0 +1,36 @@
+/* Asegura que las imágenes de categorías tengan el mismo tamaño */
+.categories .category img {
+    width: 150px; /* Ajusta a tu preferencia */
+    height: 150px; /* Ajusta a tu preferencia */
+    object-fit: fill; /* Asegura que la imagen mantenga su proporción sin deformarse */
+    border-radius: 8px; /* Opcional: para esquinas redondeadas */
+    transition: transform 0.3s ease; /* Animación suave al pasar el mouse */
+}
+
+/* Opcional: Estilo de hover para las imágenes */
+.categories .category img:hover {
+    transform: scale(1.1); /* Aumenta un poco el tamaño al pasar el mouse */
+}
+
+/* Centra las imágenes dentro de su contenedor */
+.categories .category {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: 15px; /* Espaciado entre categorías */
+}
+
+
+
+.carousel-inner img {
+    height: 250px; /* Cambia el alto según sea necesario */
+    object-fit: cover; /* Asegura que las imágenes no se deformen */
+}
+
+.carousel-caption {
+    background: rgba(0, 0, 0, 0.5); /* Fondo semitransparente para la leyenda */
+    padding: 15px;
+    border-radius: 10px;
+}
+
