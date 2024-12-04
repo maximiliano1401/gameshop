@@ -41,7 +41,6 @@ session_start();
                     echo "<a href='login.php'>Ingresar</a>";
                 }
                 ?>
-                <a href="">Categorías</a>
                 <a href="carrito_compras.php">Carrito</a>
                 <a href="mis_pedidos.php">Historial</a>
             </nav>
