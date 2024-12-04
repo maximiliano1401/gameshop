@@ -92,7 +92,7 @@ if (!isset($_SESSION["UsuarioID"])) {
     <div class="card text-center">
         <div class="card-body">
             <h5 class="card-title">Agregar Productos al sistema</h5>
-            <img src="add-product.png" alt="Agregar producto" class="img-fluid mb-3" style="max-width: 120px;">
+            <img src="img_products/logo.png" alt="Agregar producto" class="img-fluid mb-3" style="max-width: 120px;">
             <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#addProductModal">Añadir</button>
         </div>
     </div>

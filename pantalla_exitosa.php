@@ -170,7 +170,7 @@ if (!isset($_SESSION["UsuarioID"])) {
             <p>¡Gracias por tu compra! Tu pedido ha sido procesado con éxito.</p>
             <div style="text-align: center;">
                 <!-- Espacio para la imagen -->
-                <img id="compra-imagen" src="ruta_a_tu_imagen.jpg" alt="Compra Exitosa" style="width: 100%; max-width: 300px; margin: 10px 0;">
+                <img id="compra-imagen" src="img_products/logo.png" alt="Compra Exitosa" style="width: 100%; max-width: 300px; margin: 10px 0;">
             </div>
         </div>
         <div class="modal-footer">
