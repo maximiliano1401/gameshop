@@ -24,7 +24,14 @@ if (!isset($_SESSION["UsuarioID"])) {
     <header>
         <div class="header-container">
         <h1 class="logo"><a href="index.php"> Game<span>Shop</span> </a></h1>
-            <input type="text" placeholder="Buscar productos" class="search-bar">
+            <!-- Formulario de búsqueda -->
+            <form method="GET" action="index.php" class="search-form">
+                <input type="text" name="search" placeholder="Buscar productos" class="search-bar" value="<?php echo isset($_GET['search']) ? $_GET['search'] : ''; ?>">
+                <!-- Botón para realizar la búsqueda -->
+                <button type="submit" class="search-button">
+                    <i class="fas fa-search"></i> Buscar
+                </button>
+            </form>
             <nav class="nav-links-desktop">
                 <?php
                 if (isset($_SESSION["UsuarioID"])) {

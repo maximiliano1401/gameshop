@@ -54,7 +54,7 @@ if (!isset($_SESSION["UsuarioID"])) {
             text-align: right;
         }
 
-        .modal-footer .save-btn, 
+        .modal-footer .save-btn,
         .modal-footer .close-btn {
             padding: 10px 20px;
             border: none;
@@ -96,8 +96,15 @@ if (!isset($_SESSION["UsuarioID"])) {
     <!-- Barra de navegación de escritorio -->
     <header>
         <div class="header-container">
-        <h1 class="logo"><a href="index.php"> Game<span>Shop</span> </a></h1>
-            <input type="text" placeholder="Buscar productos" class="search-bar">
+            <h1 class="logo"><a href="index.php"> Game<span>Shop</span> </a></h1>
+            <!-- Formulario de búsqueda -->
+            <form method="GET" action="index.php" class="search-form">
+                <input type="text" name="search" placeholder="Buscar productos" class="search-bar" value="<?php echo isset($_GET['search']) ? $_GET['search'] : ''; ?>">
+                <!-- Botón para realizar la búsqueda -->
+                <button type="submit" class="search-button">
+                    <i class="fas fa-search"></i> Buscar
+                </button>
+            </form>
             <nav class="nav-links-desktop">
                 <?php
                 if (isset($_SESSION["UsuarioID"])) {
