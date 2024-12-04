@@ -27,6 +27,11 @@ header {
     color: #333;
 }
 
+.logo a{
+text-decoration: none;
+color: #333;
+}
+
 .logo span {
     color: white;
 }
